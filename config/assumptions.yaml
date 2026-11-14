@@ -1,0 +1,23 @@
+status: academic_model_implemented
+authoritative_parameter_file: config/model.yaml
+price_base_year: 2026
+port_capex_rub:
+  value: 90000000
+  evidence_status: assumption
+  source: droneport_variant_i_one_day_rtx3090_prompt.md
+aircraft_capex_rub:
+  value: 250000000
+  evidence_status: assumption
+  source: droneport_variant_i_one_day_rtx3090_prompt.md
+flight_speed_kmh: 240
+charge_duration_min: 30
+charger_count_per_port: 2
+opening_dates: start_of_purchase_year
+operating_days: 330
+demand_parameters: config/model.yaml#demand
+opex_model: fixed_port_and_aircraft_cost_plus_energy_for_all_flights
+price_evidence_status: assumption
+inflation: 0
+vat_basis: not_separately_modeled_within_assumed_total_costs
+network_overhead: assumed_included_in_port_capex_and_fixed_opex
+missing_population: preserved_null_without_imputation_per_user_instruction

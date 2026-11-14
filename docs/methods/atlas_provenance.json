@@ -1,0 +1,7 @@
+{
+  "module": "/home/usr/Downloads/tensor/tensor_main/main_tensor_decomposition/analysis/cinematic_atlas/atlas_theme.py",
+  "module_sha256": "993861470069ffadc29778e682e61762a3faea67adf01c060bb0ec0a34a3338a",
+  "white_reference": "/home/usr/Downloads/tensor/article_tex_v4/tools/build_visuals.py",
+  "white_reference_sha256": "c711d9c9e464ca123cb355f3f4fda2304e3c7144760a6a12ba9a44cb2aa14d40",
+  "reuse": "User supplied Cinematic Atlas; FigureRegistry and beeswarm used with a white theme adapter"
+}

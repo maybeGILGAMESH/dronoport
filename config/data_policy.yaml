@@ -1,0 +1,12 @@
+missing_values: preserve_null
+imputation: disabled_by_user
+additional_downloads: false
+registry_scope: OSM_place_nodes_in_regional_polygons
+place_types: [city, town, village, hamlet, isolated_dwelling]
+population_source_priority: [rosstat_2021]
+selection_rule_version: stratified_population_v1
+# Реестр включает все найденные допустимые place-узлы, в том числе без населения.
+# Выборка для гравитационной модели: только однозначно сопоставленное население.
+# По регионам поочередно берём максимум населения (50/67/69), пока не получим 30.
+# При равенстве: name_normalized, place_id. Малая выборка — первые 8 основной.
+# Никакие результаты графа или оптимизации в отборе не используются.

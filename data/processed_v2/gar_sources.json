@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://fias-file.nalog.ru/downloads/2026.11.03/gar_xml.zip",
+    "member": "AS_OBJECT_LEVELS_20261102_e28660c7-7d04-4d5d-8c3b-691f05182f8f.XML",
+    "compressed_bytes": 591,
+    "bytes": 2918,
+    "local_file": "data/raw/gar_20261103/AS_OBJECT_LEVELS_20261102_e28660c7-7d04-4d5d-8c3b-691f05182f8f.XML",
+    "sha256": "c2fb4c5e4c1f0edb16de909f4e695d8b82aefefd120ee0621c562b8b1ce49186",
+    "downloaded_at": "2026-11-05T15:36:12.967830+00:00"
+  },
+  {
+    "url": "https://fias-file.nalog.ru/downloads/2026.11.03/gar_xml.zip",
+    "member": "50/AS_ADDR_OBJ_20261102_945d0f9b-7f2c-4f29-92f2-ca6761374b11.XML",
+    "compressed_bytes": 8098696,
+    "bytes": 59623459,
+    "local_file": "data/raw/gar_20261103/50_AS_ADDR_OBJ_20261102_945d0f9b-7f2c-4f29-92f2-ca6761374b11.XML",
+    "sha256": "6a3b15c033c9ea0669ece14382b027b7f107bfa4991a1d21bca941f7d2751bbc",
+    "downloaded_at": "2026-11-05T15:36:12.994652+00:00"
+  },
+  {
+    "url": "https://fias-file.nalog.ru/downloads/2026.11.03/gar_xml.zip",
+    "member": "67/AS_ADDR_OBJ_20261102_c5a5c661-ca79-42ef-a312-c4d594829f5c.XML",
+    "compressed_bytes": 1536129,
+    "bytes": 11703906,
+    "local_file": "data/raw/gar_20261103/67_AS_ADDR_OBJ_20261102_c5a5c661-ca79-42ef-a312-c4d594829f5c.XML",
+    "sha256": "94a11b96e892634e46eaeeec6578702d924033bfc8cc7570942a4b139d7a3d67",
+    "downloaded_at": "2026-11-05T15:36:13.000049+00:00"
+  },
+  {
+    "url": "https://fias-file.nalog.ru/downloads/2026.11.03/gar_xml.zip",
+    "member": "69/AS_ADDR_OBJ_20261102_4615ca67-7884-4e54-bb42-ec245f75553b.XML",
+    "compressed_bytes": 2087425,
+    "bytes": 15930717,
+    "local_file": "data/raw/gar_20261103/69_AS_ADDR_OBJ_20261102_4615ca67-7884-4e54-bb42-ec245f75553b.XML",
+    "sha256": "988b065686c68745f1eb3059a92e0cf4a582e5b495bfb4d2415f332404662cfc",
+    "downloaded_at": "2026-11-05T15:36:13.007300+00:00"
+  }
+]

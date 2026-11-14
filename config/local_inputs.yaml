@@ -1,0 +1,8 @@
+# Пути относительно корня проекта. Загруженные пользователем файлы оставлены на месте.
+assignment_pdf: "Задание_Сеть_дронопортов_России.pdf"
+osm_pbf: "central-fed-district-261103.osm.pbf"
+population_workbook: "Tom1_tab-5_VPN-2020.xlsx"
+rosstat_workbooks_glob: "Tom1_tab-*_VPN-2020.xlsx"
+population_observation_date: "2021-10-01"
+gar_files: []
+geonames_files: []

@@ -1,0 +1,13 @@
+model_version: time_network_v2
+time_step_minutes: 10
+day_minutes: 720
+movement_window_minutes: 90
+max_movements_per_window: 2
+full_charge_after_each_leg: true
+mip_seconds: 1800
+annealing_seconds: 600
+annealing_iterations: 0
+allocation_seconds: 15
+matrix_nonzero_limit: 3000000
+initial_schedule_trials: 8
+seed: 0

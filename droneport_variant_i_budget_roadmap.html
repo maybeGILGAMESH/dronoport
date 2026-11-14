@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Droneport Planner · вариант И · бюджет и закупки · 2026</title>
+  <style>
+    :root{--bg:#090f1b;--panel:#101a2b;--panel2:#142138;--ink:#e7eefb;--muted:#93a5bd;--line:#293c55;--cyan:#77d4e9;--blue:#84a6ff;--violet:#c9b0ff;--gold:#f1c68a;--green:#80d8b3;--red:#ef9a9a;--shade:#091321;--radius:18px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 65% -10%,#1b3250 0,transparent 36%),var(--bg);color:var(--ink);font:15px/1.63 system-ui,-apple-system,blinkmacsystemfont,"Segoe UI",sans-serif}
+    button,select,input{font:inherit}button{cursor:pointer}
+    a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+    .layout{display:grid;grid-template-columns:255px minmax(0,1fr);min-height:100vh}
+    .side{border-right:1px solid var(--line);background:#0c1523;position:sticky;top:0;height:100vh;overflow-y:auto;padding:30px 18px 22px;z-index:2}
+    .logo{display:flex;align-items:center;gap:12px;padding:8px 9px 22px;border-bottom:1px solid var(--line)}
+    .logo-mark{height:39px;width:39px;border:1px solid #477a9b;background:linear-gradient(145deg,#17416b,#142236);border-radius:12px;display:grid;place-items:center;color:#aff1ff;font-size:20px;font-weight:800}
+    .logo strong{display:block;line-height:1.2;letter-spacing:.035em;font-size:13px}.logo small{display:block;color:var(--muted);font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-top:5px}
+    .sidelabel{color:#667f9c;text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:750;margin:27px 10px 11px}
+    nav a{display:block;color:#a9bdd4;border-radius:9px;padding:9px 10px;margin:2px 0;font-size:13px;line-height:1.35}nav a:hover,nav a.active{background:#182a41;color:#ebfaff;text-decoration:none}
+    nav a span{color:#5f90ad;margin-right:9px;font-size:11px}
+    .sidenote{margin-top:25px;border:1px solid var(--line);background:#102037;border-radius:12px;padding:13px;color:#9cb2ca;font-size:12px}
+    main{min-width:0;max-width:1570px;width:100%;margin:0 auto;padding:34px clamp(22px,4.6vw,76px) 90px}
+    section{scroll-margin-top:30px;margin-top:66px}
+    .eyebrow{text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--cyan)}
+    h1,h2,h3,h4,p{margin-top:0}h1{font-size:clamp(36px,4.4vw,64px);font-weight:760;line-height:1.08;letter-spacing:-.049em;max-width:1040px;margin-bottom:20px}h2{font-size:clamp(27px,3vw,38px);letter-spacing:-.038em;line-height:1.2;margin:8px 0 16px}h3{font-size:18px;letter-spacing:-.015em;line-height:1.35;margin-bottom:12px}h4{font-size:14px;margin:0 0 10px}
+    p{color:#b6c7db}strong{color:#f1f6ff}.lead{font-size:18px;line-height:1.65;color:#c9d7e8;max-width:930px}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin:27px 0 22px}.chip{font-size:11px;letter-spacing:.02em;border:1px solid var(--line);background:#14243a;color:#b4c9df;padding:6px 11px;border-radius:20px}.chip.cyan{border-color:#315f76;color:#9eeaff;background:#102f40}.chip.gold{border-color:#6a5439;color:#f7d6a9;background:#30281f}
+    .header-band{border:1px solid #345c79;border-radius:var(--radius);background:linear-gradient(130deg,#102d47,#121a30 70%);padding:25px 28px;margin-top:28px;display:flex;justify-content:space-between;gap:30px;align-items:center}
+    .header-band b{font-size:19px}.header-band p{margin:8px 0 0;max-width:790px}.accent-number{font-size:44px;letter-spacing:-.05em;font-weight:850;color:#8de3f6;white-space:nowrap}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:27px 0}.stat{padding:19px;border:1px solid var(--line);border-radius:14px;background:#101b2c}.stat b{display:block;font-size:27px;letter-spacing:-.04em;color:#eaf4ff;line-height:1.15}.stat span{display:block;color:#99aec7;font-size:12px;margin-top:10px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:22px}.section-head p{max-width:710px;margin:0}.micro{font-size:12px;color:#8ea4be}.line-top{border-top:1px solid var(--line);padding-top:22px}
+    .grid{display:grid;gap:14px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{border:1px solid var(--line);background:linear-gradient(150deg,#142239,#101a2c);border-radius:15px;padding:21px;min-width:0}.card > p:last-child{margin-bottom:0}.card.soft{background:#101b2b}.card.featured{border-color:#52718c;background:linear-gradient(160deg,#18344a,#111c2f 85%)}
+    .card .toprow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+    .pill{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:6px;border:1px solid #496078;background:#233348;color:#d8e5f8;white-space:nowrap}
+    .pill.good{border-color:#386f60;background:#16372f;color:#b7efdb}.pill.warn{border-color:#7c5e36;background:#3b2b1e;color:#ffe0b7}.pill.note{border-color:#415d9d;background:#212d50;color:#cad6ff}
+    .card ul{padding-left:18px;color:#b2c7db;margin:10px 0 0}.card li{margin:5px 0}.card b{color:#f3f8ff}
+    .muted{color:#93a5bd}.tiny{font-size:11px;color:#8ea4be}.good-text{color:var(--green)}.gold-text{color:var(--gold)}.blue-text{color:var(--blue)}
+    .note{border-left:3px solid var(--cyan);background:#112539;border-radius:0 9px 9px 0;padding:15px 17px;color:#c2d5e6;font-size:13px;margin:16px 0}.note.warn{border-left-color:var(--gold);background:#2a251e}.note strong{color:#f7faff}
+    .source-id{display:inline-block;color:#9bc5f0;background:#243b56;padding:2px 6px;border-radius:5px;font-size:10px;font-weight:700;vertical-align:1px;margin-left:3px}
+    .table-wrap{border:1px solid var(--line);border-radius:13px;overflow-x:auto;background:#101b2c}table{width:100%;border-collapse:collapse;min-width:650px;font-size:13px}th{text-align:left;color:#8eb7d3;font-weight:750;background:#172840;text-transform:uppercase;letter-spacing:.065em;font-size:10px;padding:15px 14px}td{padding:14px;border-top:1px solid #25374e;color:#afc0d5;vertical-align:top}td:first-child{color:#e9f4fe;font-weight:650}td b{color:#edf4ff}tr:hover td{background:#17253a}
+    .controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.control{background:#14233a;color:#aebed4;padding:9px 15px;border:1px solid #2f4660;border-radius:9px;font-weight:650;font-size:12px}.control[aria-pressed="true"],.control.active{background:#1a4b5d;border-color:#4c9aaf;color:#dbfaff}.control:hover{border-color:#82c3d2}.button-secondary{background:transparent;border:1px solid #3d607a;color:#c8e9f8;border-radius:9px;padding:10px 14px;font-size:12px}
+    .profile-summary{display:grid;grid-template-columns:1.15fr .85fr;gap:15px;margin-top:17px}.profile-heading{font-size:23px;letter-spacing:-.035em;margin-bottom:8px}.profile-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:18px}.metric{background:#0d1b2c;border:1px solid #293e55;border-radius:10px;padding:13px}.metric b{font-size:22px;display:block;color:#e6f3ff}.metric span{color:#91aac6;font-size:11px}
+    .flowgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.node{border:1px solid #3e6075;background:linear-gradient(150deg,#17334a,#111e31);border-radius:13px;padding:16px;min-height:172px;position:relative}.node::after{content:'→';position:absolute;right:-15px;top:44%;font-size:22px;color:#75b5ca;z-index:1}.node:nth-child(4)::after,.node:nth-child(8)::after{display:none}.node h3{font-size:14px;margin:10px 0}.node .node-id{font-size:11px;color:var(--cyan);letter-spacing:.1em;font-weight:850}.node p{font-size:12px;line-height:1.55;margin:0;color:#a8bfd7}
+    .subflow{margin-top:15px;border:1px solid #36526d;border-radius:11px;background:#122236;padding:17px;display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:12px;align-items:center}.subflow div{font-size:12px;color:#adc3dc}.subflow b{display:block;font-size:13px;margin-bottom:4px}
+    .data-card{display:flex;flex-direction:column;gap:9px}.data-card .kind{color:#87d7ed;font-size:10px;letter-spacing:.1em;font-weight:750;text-transform:uppercase}.data-card p{font-size:12px;line-height:1.56;margin-bottom:0}.data-card .barline{border-top:1px solid #29415b;padding-top:10px;margin-top:auto}.data-card .barline b{display:block;color:#a5bdd8;font-size:10px;text-transform:uppercase;letter-spacing:.08em}.data-card .barline p{font-size:12px;margin:3px 0 0}
+    .data-card[hidden]{display:none}.data-link{margin-top:8px;font-weight:700;font-size:12px}
+    .arch{border:1px solid var(--line);border-radius:16px;background:#0e1b2b;padding:23px}.arch-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.arch-block{padding:16px;border:1px solid #34536a;border-radius:11px;background:#14293d}.arch-block small{display:block;color:#76b9ce;font-size:11px;letter-spacing:.09em;text-transform:uppercase}.arch-block strong{display:block;font-size:15px;margin-top:6px}.arch-block p{margin:6px 0 0;font-size:11px}.arch-arrow{text-align:center;color:#8fc5e3;padding:8px;letter-spacing:.16em;font-size:12px}
+    .sourcebox{border:1px solid var(--line);border-radius:11px;padding:16px;background:#122236}.sourcebox p{font-size:12px;margin-bottom:8px}.sourcebox a{font-weight:650;word-break:break-word;font-size:12px}
+    .roadmap-layout{display:grid;grid-template-columns:1fr 275px;gap:16px}.stage-list{display:grid;gap:9px}.stage{display:grid;grid-template-columns:60px minmax(0,1fr) 98px;gap:13px;align-items:start;background:#121f32;border:1px solid #2a4058;border-radius:11px;padding:15px}.stage-index{width:41px;height:41px;display:grid;place-items:center;border-radius:10px;background:#1d405b;color:#bdefff;font-size:12px;font-weight:850}.stage h3{font-size:14px;margin-bottom:4px}.stage p{font-size:12px;margin-bottom:5px}.stage .out{font-size:11px;color:#80bba7}.stage small{display:block;font-size:10px;color:#809db9;letter-spacing:.07em;text-transform:uppercase}.stage .days{text-align:right;color:#e7f6ff;font-weight:750}.stage .days span{display:block;font-size:10px;color:#859eb8;font-weight:500;margin-top:3px}
+    .summary-block{border:1px solid #36526c;border-radius:13px;background:#152940;padding:20px;position:sticky;top:24px;align-self:start}.bigval{font-size:39px;letter-spacing:-.055em;font-weight:850;color:#a5eaff;line-height:1.12}.summary-row{border-top:1px solid #38526b;padding-top:14px;margin-top:15px}.summary-row b{display:block;font-size:15px}.summary-row span{font-size:11px;color:#a4b9d0}
+    .select-row{display:flex;align-items:center;gap:10px;margin-top:14px}.select-row label{font-size:12px;color:#a3bacf}.select-row select{background:#101e30;color:#e1ecf7;border:1px solid #3d586f;border-radius:8px;padding:7px 10px;min-width:100px}
+    .features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.feature{border:1px solid var(--line);border-radius:12px;background:#121f32;padding:17px;display:grid;grid-template-columns:40px 1fr;gap:12px}.feature-index{border:1px solid #456c87;border-radius:10px;width:37px;height:37px;background:#203b54;color:#92d7f0;display:grid;place-items:center;font-weight:850;font-size:13px}.feature h3{font-size:14px;margin:0 0 5px}.feature p{font-size:12px;line-height:1.52;margin:0}.feature .meta-line{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#96b5c8;margin-top:10px}
+    .code{border:1px solid #32465d;border-radius:12px;background:#071220;color:#bfdbeb;padding:17px 19px;white-space:pre-wrap;word-break:break-word;font:12px/1.65 ui-monospace,sfmono-regular,consolas,monospace;overflow:auto}
+    .risks{display:grid;gap:10px}.risk{display:grid;grid-template-columns:155px 1fr;gap:17px;border:1px solid #334860;border-radius:12px;padding:17px;background:#121f32}.risk .level{color:#e8c694;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.risk strong{font-size:13px}.risk p{font-size:12px;margin:5px 0 0}
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.check{display:flex;gap:11px;align-items:flex-start;background:#121f32;padding:13px;border:1px solid #2c4258;border-radius:9px;color:#bfd0e2;font-size:12px;cursor:pointer}.check input{accent-color:#69b8b1;width:17px;height:17px;margin-top:2px;flex-shrink:0}.check:has(input:checked){border-color:#3b826c;background:#153529}
+    .foot{border-top:1px solid var(--line);margin-top:70px;padding-top:25px;color:#7f99b3;font-size:11px}
+    .refs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ref{border:1px solid var(--line);padding:11px 13px;background:#101c2d;border-radius:9px;font-size:12px}.ref span{display:block;color:#95b0cd;font-size:10px;margin-bottom:5px}.ref a{word-break:break-word}
+    .tag{color:#e2effe;font-size:10px;border:1px solid #40566e;padding:2px 6px;border-radius:5px;display:inline-block;margin:2px}
+    .hidden{display:none!important}
+    @media(max-width:1180px){.layout{grid-template-columns:210px minmax(0,1fr)}.side{padding:20px 12px}.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.flowgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.node:nth-child(2n)::after{display:none}.roadmap-layout{grid-template-columns:1fr}.summary-block{position:static}}
+    @media(max-width:780px){.layout{display:block}.side{position:relative;height:auto;padding:15px 18px}.logo{border-bottom:0;padding-bottom:0}.sidelabel,.sidenote{display:none}.side nav{display:flex;gap:5px;overflow-x:auto;margin-top:12px}.side nav a{white-space:nowrap;font-size:11px;padding:8px}.side nav a span{display:none}main{padding:26px 17px 65px}section{margin-top:47px}.stats{grid-template-columns:repeat(2,1fr)}.grid.three,.grid.two,.features,.refs{grid-template-columns:1fr}.header-band{display:block}.accent-number{font-size:32px;margin-top:14px}.profile-summary,.subflow{grid-template-columns:1fr}.subflow{gap:9px}.arch-row{grid-template-columns:1fr}.arch-arrow{letter-spacing:0}.stage{grid-template-columns:38px 1fr 66px;gap:8px;padding:12px}.risk{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}.section-head{display:block}.flowgrid{grid-template-columns:1fr}.node{min-height:0}.node::after{display:none}}
+    @media print{*{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff;color:#172239}.layout{display:block}.side,.controls,.button-secondary,.select-row{display:none!important}main{max-width:none;padding:0 8px}.card,.stat,.arch,.sourcebox,.stage,.feature,.risk,.ref{break-inside:avoid}p,td{color:#394d61}section{margin-top:25px}a{color:#225c8b}.roadmap-layout{display:block}.summary-block{margin-top:12px}.node::after{display:none}h1{font-size:40px}}
+
+    .variant-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:16px}
+    .variant-letters{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.variant-letters b{display:grid;place-items:center;width:55px;height:58px;font-size:28px;border:1px solid #50758c;border-radius:12px;background:#19384b;color:#b9f1ff}
+    .source-grade{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:800;margin-bottom:8px;color:#91d3b9}
+    .source-grade.estimated{color:#f1c68a}.source-grade.noquote{color:#efadad}
+    .money-controls{display:flex;gap:12px;flex-wrap:wrap;margin:17px 0 20px;align-items:center}
+    .money-controls label,.input-cell label{display:flex;flex-direction:column;gap:4px;color:#9fb4cb;font-size:11px}
+    .money-controls input,.money-input,.input-cell input{width:108px;background:#0a1828;border:1px solid #3b5770;border-radius:8px;padding:8px;color:#e6f5ff;font-size:13px}
+    .input-cell input{width:82px}.money-input.narrow{width:65px}
+    .budget-table th,.budget-table td{white-space:normal}.budget-table th:first-child,.budget-table td:first-child{min-width:168px}
+    .budget-table input{width:82px}.budget-table input[type=number]{-moz-appearance:textfield}
+    .budget-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:16px 0}.budget-kpi{background:#102438;border:1px solid #2b4a64;border-radius:12px;padding:15px}.budget-kpi b{display:block;font-size:24px;color:#c2eeff}.budget-kpi span{font-size:11px;color:#aac2d8}
+    .bad{color:#ffc1bd!important}.okay{color:#9fe3c2!important}.budget-alert{border-radius:11px;border:1px solid #3d6c5b;padding:14px;background:#143327;color:#c2ead8}.budget-alert.fail{border-color:#995a58;background:#422526;color:#ffd0c9}
+    .year-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.year-card{border:1px solid #3e5873;border-radius:14px;padding:20px;background:#132239}.year-card h3{font-size:18px}.year-card small{color:#89adc8}.year-card .quarter{border-top:1px solid #29415c;padding:11px 0;font-size:12px;color:#bfd2e6}.year-card .quarter b{color:#9ae2f5}
+    .procure-list{display:grid;gap:9px}.procure-item{border:1px solid var(--line);border-radius:11px;background:#102036;padding:17px;display:grid;grid-template-columns:1fr 1.8fr;gap:15px}.procure-item p{font-size:12px;margin:0}.procure-item h3{font-size:14px;margin:0 0 5px}.procure-item .kind{font-size:10px;color:#89c8e7;text-transform:uppercase}
+    .budget-gate{border:1px solid #526b83;border-radius:12px;padding:18px;background:#12283d}
+    .data-fields{display:flex;gap:6px;flex-wrap:wrap}.data-fields code{font-size:11px;background:#0d1b2b;padding:5px;border:1px solid #2c4560;border-radius:5px}
+    .search-terms{font-size:12px;line-height:1.65;background:#091728;border:1px solid #29415d;padding:13px 15px;border-radius:9px;color:#bfe1ef}
+    @media(max-width:1100px){.variant-grid{grid-template-columns:1fr}.budget-kpis{grid-template-columns:repeat(2,1fr)}.year-cards{grid-template-columns:1fr}}
+    @media(max-width:780px){.procure-item{grid-template-columns:1fr}.budget-kpis{grid-template-columns:repeat(2,1fr)}}
+    @media print{.money-controls input,.input-cell input{border:0;background:transparent;color:#182739}.budget-alert{border-color:#aaa;color:#111}.year-card,.budget-kpi{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside class="side" aria-label="Навигация">
+    <div class="logo"><div class="logo-mark">D</div><div><strong>DRONEPORT<br>NETWORK PLANNER</strong><small>Variant И · v2.0</small></div></div>
+    <div class="sidelabel">Содержание</div>
+    <nav id="nav">
+      <a href="#summary"><span>01</span>Вывод и стратегия</a>
+      <a href="#requirements"><span>02</span>Требования задания</a>
+      <a href="#variant-i"><span>03</span>Вариант И: точки и фильтр</a>
+      <a href="#budget-i"><span>04</span>Бюджет: 1 млрд ежегодно</a>
+      <a href="#build-cost-i"><span>05</span>Строительная смета</a>
+      <a href="#budget-data-i"><span>06</span>Российские базы цен</a>
+      <a href="#procurement-i"><span>07</span>Закупки и торговые площадки</a>
+      <a href="#finance-pipeline-i"><span>08</span>Пайплайн смет и закупок</a>
+      <a href="#timeline-i"><span>09</span>Трёхлетний план строительства</a>
+      <a href="#solutions"><span>10</span>Готовые решения</a>
+      <a href="#datasets"><span>11</span>Данные и источники</a>
+      <a href="#pipeline"><span>12</span>Data / OR pipeline</a>
+      <a href="#models"><span>13</span>Три архитектуры</a>
+      <a href="#features"><span>14</span>Продуктовые фичи</a>
+      <a href="#architecture"><span>15</span>Техническая архитектура</a>
+      <a href="#roadmap"><span>16</span>Roadmap и сроки</a>
+      <a href="#roles"><span>17</span>Роли и Data Engineer</a>
+      <a href="#contracts"><span>18</span>Входы и выходы</a>
+      <a href="#risks"><span>19</span>Риски и критерии готовности</a>
+      <a href="#references"><span>20</span>Источники исследования</a>
+    </nav>
+    <div class="sidenote"><strong>Основа</strong><br>Задание «Сеть дронопортов России», 12 страниц. Внешние данные и ПО проверены по открытым источникам на 04.11.2026.<br><br>Статус: проектирование, не реализованный продукт.</div>
+  </aside>
+  <main>
+    <header id="summary">
+      <div class="eyebrow">Исследование · архитектура · план реализации</div>
+      <h1>Вариант И: сеть дронопортов,<br>1 млрд ₽ в год,<br>сметы и закупки.</h1>
+      <p class="lead">Спроектировать трёхлетнюю сеть дронопортов, оценить спрос, выбрать площадки и флот, доказуемо проверить ограничения и дать пользователю инструмент сценарного планирования. <strong>Нейросеть не должна подменять оптимизатор.</strong></p>
+      <div class="meta"><span class="chip cyan">Рекомендация: CPU-first</span><span class="chip">Горизонт модели: 3 года</span><span class="chip">30–80 пунктов + малая задача 8–12</span><span class="chip">Вариант И · Ж, З, И, К, Л</span><span class="chip">1 млрд ₽ ежегодно · 3 транша</span><span class="chip gold">Все сроки — экспертные оценки, не замеры</span></div>
+      <div class="header-band"><div><b>Оптимальная стратегия разработки</b><p>Стартуем с воспроизводимого ядра <strong>GeoData → Demand → MIP/heuristics → CP-SAT → Scenarios</strong>. Дальше наращиваем API, визуализацию, паспорта данных и аудит. GPU подключаем только после профилирования.</p></div><div class="accent-number">CPU &gt; GPU</div></div>
+      <div class="stats">
+        <div class="stat"><b>3</b><span>уровня готовности: сдача / research / product</span></div>
+        <div class="stat"><b>8</b><span>ключевых вычислительных контуров</span></div>
+        <div class="stat"><b>0</b><span>обязательных ML-моделей для первой версии</span></div>
+        <div class="stat"><b>10–14 нед.</b><span>продуктовый MVP командой из 3 человек с бюджетным контуром</span></div>
+      </div>
+      <div class="grid three">
+        <div class="card featured"><div class="toprow"><span class="pill good">Взять за основу</span></div><h3>Математика решает</h3><p>SCIP или HiGHS для MIP и границ, OR-Tools CP-SAT для расписания, NetworkX для BFS и A*. Это воспроизводимо и защитимо.</p></div>
+        <div class="card"><div class="toprow"><span class="pill note">Ускорить разработку</span></div><h3>Реиспользовать компоненты</h3><p>GeoNames / ФИАС / Росстат / ФГИС ЦС / ЕИС, готовые геобиблиотеки, PyVRP для отдельных транспортных экспериментов, фасад FastAPI при переходе к продукту.</p></div>
+        <div class="card"><div class="toprow"><span class="pill warn">Не обещать</span></div><h3>Реальный авиасервис</h3><p>10 мест и 200 км — условия учебного кейса. Сертификация, воздушные ограничения, реальные тарифы и аэропортовая безопасность в базовую модель не входят.</p></div>
+      </div>
+    </header>
+
+    <section id="requirements">
+      <div class="eyebrow">Что предписывает PDF, а что добавляем сами</div><h2>Контракт с заданием</h2>
+      <p>Ниже — обязательное ядро работы. Продуктовые дополнения не должны менять целевую функцию и правила исходной задачи.</p>
+      <div class="table-wrap"><table><thead><tr><th>Блок</th><th>Обязательно по заданию</th><th>Проверка / артефакт</th><th>Страница</th></tr></thead><tbody>
+        <tr><td>Вариант и населённые пункты</td><td>И: Тверская, Смоленская, Московская области; буквы Ж/З/И/К/Л; 30–80 основных пунктов; малая задача 8–12; неизменность состава после оптимизации</td><td>variant.yaml, towns.parquet, журнал исключений, проверка связности</td><td>3–5</td></tr>
+        <tr><td>Спрос</td><td>Направленный OD по годам; наблюдение или явно синтетическая гравитационная модель</td><td>demand_od.parquet, passport_parameters.yaml</td><td>7</td></tr>
+        <tr><td>Физика и финансы</td><td>10 мест, участок до 200 км, пересадки, порожние рейсы, эксплуатация и накопленные бюджеты каждого года</td><td>constraints.json, audit_budget.csv, проверка каждого рейса</td><td>6, 8</td></tr>
+        <tr><td>Оптимизаторы</td><td>Greedy-baseline, MIP на малом экземпляре, свой стохастический/локальный метод, BFS и A*</td><td>log прогона, статус, lower/upper bound, gap</td><td>9</td></tr>
+        <tr><td>Планирование</td><td>Сравнить поэтапное и совместное планирование за три года</td><td>yearly_vs_joint.csv, карта по годам</td><td>9</td></tr>
+        <tr><td>Эксплуатация</td><td>Проверенное расписание последних типичных суток, зарядка, базирование флота</td><td>final_year_schedule.csv, infeasibility_report.json</td><td>8, 11</td></tr>
+        <tr><td>Устойчивость</td><td>Спрос ±30%, дальность 160 км, отказ узла, робастный план, минимакс и альфа-бета на малом экземпляре</td><td>scenarios.parquet, regret / worst-case, search_tree.json</td><td>10</td></tr>
+        <tr><td>Эксперименты</td><td>Масштаб, бюджет, качество данных, не менее 10 seed стохастического метода</td><td>benchmarks.csv, plots, statistical_notes.md</td><td>10–11</td></tr>
+      </tbody></table></div>
+      <div class="note"><strong>Рамка результата:</strong> максимум завершённых OD-поездок за три года, а не максимум перелётов, посадок или пассажиро-участков. Пересадка одного пассажира не увеличивает целевую функцию. Бюджеты соблюдаются на конец каждого года, нельзя тратить будущий транш заранее.</div>
+    </section>
+
+
+    <section id="variant-i">
+      <div class="eyebrow">Закреплённый вариант · индивидуальные ограничения</div><h2>Вариант И: территория и фиксированный фильтр</h2>
+      <div class="variant-grid">
+        <div class="card featured"><span class="pill good">Основание: PDF, с. 3–5</span><h3 style="margin-top:15px">Три соседние области, один общий бюджет</h3>
+          <div class="variant-letters"><b>Ж</b><b>З</b><b>И</b><b>К</b><b>Л</b></div>
+          <p><strong>Тверская, Смоленская и Московская области.</strong> Допустимы населённые пункты, названия которых начинаются на одну из этих пяти букв. Буквенный фильтр действует также на транзитные хабы. Сам город Москва как отдельный субъект в этот вариант не входит.</p>
+          <p class="tiny">Ё нормализуется к Е, Й к И при фильтрации согласно PDF; запрещено исключать неудобные точки после оптимизации. Полная выгрузка и подсчёт связности обязательны до отбора 30–80 точек.</p>
+        </div>
+        <div class="card"><h3>Первичный список для проверки, не утверждённая сеть</h3>
+          <div class="table-wrap"><table style="min-width:0"><thead><tr><th>Регион</th><th>Кандидаты</th></tr></thead><tbody>
+          <tr><td>Тверская</td><td>Зубцов, Кашин, Кимры, Конаково, Калязин, Лихославль, Жарковский</td></tr>
+          <tr><td>Смоленская</td><td>Издешково, Кардымово, Красный</td></tr>
+          <tr><td>Московская</td><td>Истра, Клин, Кашира, Коломна, Лобня, Жуковский, Зарайск, Луховицы</td></tr>
+          </tbody></table></div>
+          <p class="tiny" style="margin-top:12px">Это предварительные наименования для автоматической сверки с ГАР, Росстатом и геоданными. Никакая площадка здесь ещё не подтверждена по земле, аэродромным ограничениям, мощности сети и возможности приобретения техники. Реальный реестр 30–80 пунктов пока не собран.</p>
+        </div>
+      </div>
+      <div class="grid three" style="margin-top:15px">
+        <div class="card"><h3>Паспорт variant_i.yaml</h3><div class="data-fields"><code>variant: и</code><code>regions: 69, 67, 50</code><code>letters: жзикл</code><code>range_km: 200</code><code>capacity: 10</code><code>years: 3</code></div><p style="margin-top:12px" class="tiny">Коды субъектов приведены для идентификации. Названия и регион проверяются по официальному реестру.</p></div>
+        <div class="card"><h3>Порядок подготовки</h3><p>ГАР → нормализация → сверка координат → население → буквенный фильтр → проверка расстояний 200/160 км → закрепление 30–80 и 8–12 пунктов.</p></div>
+        <div class="card"><h3>Что нельзя обещать</h3><p>Буквенный фильтр определяет <strong>допустимость пунктов для модели</strong>, но не право строить площадку или выполнять пассажирский рейс. Территория Московской области требует отдельной проверки ограничений воздушного пространства.</p></div>
+      </div>
+    </section>
+
+    <section id="budget-i">
+      <div class="eyebrow">Financial control · интерактивная проверка</div><h2>1 млрд ₽ ежегодно: строительство и покупка флота уже в первый год</h2>
+      <p>В начале каждого года поступает <strong>только 1 млрд ₽</strong>. Будущие транши недоступны; остаток прошлых лет переносится. Считаем накопленные расходы и переносимый остаток, а не просто проверяем общую сумму 3 млрд ₽. Числа ниже — <strong>тестовый бюджет, не коммерческая оферта и не найденные контрактные цены</strong>.</p>
+      <div class="money-controls">
+        <label>Полный дронопорт, млн ₽<input type="number" id="unit-port" min="0" max="10000" step="5" value="90"></label>
+        <label>Учебный дрон на 10 мест, млн ₽<input type="number" id="unit-drone" min="0" max="10000" step="10" value="250"></label>
+        <label>Годовая эксплуатация порта, млн ₽<input type="number" id="year-port-opex" min="0" step="1" value="12"></label>
+        <label>Годовая эксплуатация дрона, млн ₽<input type="number" id="year-drone-opex" min="0" step="1" value="18"></label>
+        <button class="button-secondary" id="reset-budget">Вернуть исходный сценарий</button>
+        <button class="button-secondary" id="export-budget">Скачать budget.csv</button>
+      </div>
+      <div class="table-wrap"><table class="budget-table"><thead><tr><th>Статья / корректировка</th><th>Год 1</th><th>Год 2</th><th>Год 3</th></tr></thead><tbody>
+        <tr><td>Новые дронопорты, шт.</td><td><input id="ports-0" type="number" min="0" max="99" value="3"></td><td><input id="ports-1" type="number" min="0" max="99" value="2"></td><td><input id="ports-2" type="number" min="0" max="99" value="3"></td></tr>
+        <tr><td>Новые дроны, шт.</td><td><input id="drones-0" type="number" min="0" max="99" value="2"></td><td><input id="drones-1" type="number" min="0" max="99" value="1"></td><td><input id="drones-2" type="number" min="0" max="99" value="1"></td></tr>
+        <tr><td>Общие изыскания, разрешения и проектирование, млн ₽</td><td><input id="survey-0" type="number" min="0" value="50"></td><td><input id="survey-1" type="number" min="0" value="50"></td><td><input id="survey-2" type="number" min="0" value="60"></td></tr>
+        <tr><td>ИТ / связь / инженерная безопасность, млн ₽</td><td><input id="tech-0" type="number" min="0" value="35"></td><td><input id="tech-1" type="number" min="0" value="40"></td><td><input id="tech-2" type="number" min="0" value="50"></td></tr>
+        <tr><td>Плановый бюджет эксплуатации, млн ₽</td><td><input id="opex-0" type="number" min="0" value="75"></td><td><input id="opex-1" type="number" min="0" value="180"></td><td><input id="opex-2" type="number" min="0" value="250"></td></tr>
+        <tr><td>Риски, страхование и прочие затраты, млн ₽</td><td><input id="risk-0" type="number" min="0" value="60"></td><td><input id="risk-1" type="number" min="0" value="90"></td><td><input id="risk-2" type="number" min="0" value="80"></td></tr>
+        <tr><td>Строительство, млн ₽</td><td id="build-cost-0">270</td><td id="build-cost-1">180</td><td id="build-cost-2">270</td></tr>
+        <tr><td>Закупка флота, млн ₽</td><td id="fleet-cost-0">500</td><td id="fleet-cost-1">250</td><td id="fleet-cost-2">250</td></tr>
+        <tr><td>Все плановые расходы, млн ₽</td><td id="total-cost-0">990</td><td id="total-cost-1">790</td><td id="total-cost-2">960</td></tr>
+        <tr><td>Доступно: транш + перенос, млн ₽</td><td id="available-0">1000</td><td id="available-1">1010</td><td id="available-2">1220</td></tr>
+        <tr><td>Остаток на конец года, млн ₽</td><td id="carry-0">10</td><td id="carry-1">220</td><td id="carry-2">260</td></tr>
+        <tr><td>Кумулятивный расход, млн ₽</td><td id="cumulative-0">990</td><td id="cumulative-1">1780</td><td id="cumulative-2">2740</td></tr>
+        <tr><td>Финансовый статус</td><td id="budget-status-0">Допустимо</td><td id="budget-status-1">Допустимо</td><td id="budget-status-2">Допустимо</td></tr>
+      </tbody></table></div>
+      <div class="budget-kpis">
+        <div class="budget-kpi"><b id="all-ports">8</b><span>Дронопортов к концу третьего года</span></div>
+        <div class="budget-kpi"><b id="all-drones">4</b><span>Дронов к концу третьего года</span></div>
+        <div class="budget-kpi"><b id="all-spend">2,74</b><span>Плановые затраты, млрд ₽</span></div>
+        <div class="budget-kpi"><b id="all-carry">260</b><span>Неизрасходовано, млн ₽</span></div>
+      </div>
+      <div id="budget-alert" class="budget-alert">Сценарий проходит годовые ограничения.</div>
+      <div class="note warn"><strong>Статус цен:</strong> 90 млн ₽ на порт и 250 млн ₽ за десятиместный аппарат — <strong>синтетические входные параметры</strong>. Не найдено подтверждённой открытой закупочной цены серийного сертифицированного десятиместного пассажирского дрона, подходящего под условия кейса. При цене 450 млн ₽ за аппарат исходный первый год нарушит лимит — это можно увидеть в калькуляторе. Строка «риски и прочие затраты» консервативно включена в расчёт как расход; реально неиспользованные резервы увеличат переносимый остаток.</div>
+      <div class="grid two"><div class="card"><h3>Проверяемая формула</h3><div class="code">available[t] = 1000 + carry[t - 1]
+spend[t] = new_ports[t] × port_price + new_drones[t] × drone_price + other_costs[t]
+carry[t] = available[t] - spend[t]
+constraint: carry[t] ≥ 0
+constraint: sum(spend[1..t]) ≤ t × 1000</div><p class="tiny" style="margin-top:10px">Все суммы в млн рублей. Выручка отдельно; новые поступления от билетов не увеличивают лимит бюджетного финансирования.</p></div><div class="card"><h3>Эксплуатация уже приобретённых активов</h3><p>Калькулятор дополнительно сравнивает введённый эксплуатационный бюджет с минимальной учебной оценкой: 12 млн ₽ на действующий порт и 18 млн ₽ на дрон за полный год; новые активы считаются введёнными в середине года. Это <strong>контроль снизу</strong>, а не доказательство достаточности расходов на все рейсы.</p><div id="opex-check" class="tiny">Проверка достаточности эксплуатационных резервов.</div></div></div>
+    </section>
+
+    <section id="build-cost-i">
+      <div class="eyebrow">Construction cost · нормативы РФ и учебная детализация</div><h2>Как собирать смету дронопорта, а не выдумывать цену целиком</h2>
+      <p>Первая отправная точка — НЦС-2026 «Объекты гражданской авиации», далее ФСНБ-2022 и ресурсно-индексный метод (РИМ) через ФГИС ЦС. Для каждого участка нужны геология, проект, инженерные сети, расчёт технологического присоединения и согласования.</p>
+      <div class="grid two"><div class="card featured"><span class="source-grade">Нормативный ориентир, подтверждённый документом</span><h3>31,88 млн ₽ — вертолётное место стоянки</h3><p>НЦС 81-02-18-2026: показатель 18-06-002-01, асфальтобетонное покрытие, справочная площадь <strong>3120 м²</strong>, стоимость на 01.01.2026 — <strong>31 883,94 тыс. ₽</strong>.</p><p class="tiny">Это <strong>не полная стоимость дронопорта</strong>, не смета выбранного участка и не стоимость зарядки авиационной техники. Применимость норматива и региональные коэффициенты проверяются проектировщиком.</p><a href="https://base.garant.ru/413969836/" target="_blank" rel="noopener">НЦС-2026, сборник № 18</a></div>
+      <div class="card"><span class="source-grade estimated">Модельный состав одного объекта · 90 млн ₽</span><h3>Сценарное разложение затрат</h3><div class="table-wrap"><table style="min-width:0"><tbody>
+      <tr><td>Землеустройство и подготовка площадки</td><td>9 млн</td></tr><tr><td>Площадка, покрытие, ограждения</td><td>32 млн</td></tr><tr><td>Присоединение к сети и зарядная система</td><td>18 млн</td></tr><tr><td>Модуль обслуживания и диспетчерский пост</td><td>14 млн</td></tr><tr><td>Связь, пожарная и физическая безопасность</td><td>8 млн</td></tr><tr><td>Пусконаладка, местные работы</td><td>9 млн</td></tr><tr><td><b>Итого учебный порт</b></td><td><b>90 млн</b></td></tr>
+      </tbody></table></div><p class="tiny">Все шесть статей сценарные; при реальной смете соответствие нормативам и отсутствие двойного учёта необходимо проверить. Общие изыскания, проектная интеграция и ИТ учитываются отдельными годовыми строками.</p></div></div>
+      <div class="grid three" style="margin-top:15px"><div class="card"><h3>Что уточнить по каждому участку</h3><p>Кадастровый номер, вид разрешённого использования, градостроительные ограничения, наличие сетей, выделяемая мощность, геология, стоимость подъездов и охранных зон.</p></div><div class="card"><h3>Что нельзя брать как готовую авиацену</h3><p>Закупки автомобильных зарядных станций дают только контекст отдельных материалов и работ. Авиационная система зарядки, резервирование, безопасность и сертификация могут существенно изменить стоимость.</p></div><div class="card"><h3>Как получить цену для оптимизатора</h3><p>Смета по конкретному месту → диапазон P10/P50/P90 → дата и регион цены → ссылка на норматив / контракт / КП → метка наблюдение или допущение.</p></div></div>
+    </section>
+
+    <section id="budget-data-i">
+      <div class="eyebrow">Russia-first sources · evidence register</div><h2>Информационные базы РФ для расчёта строительства и закупок</h2>
+      <div class="table-wrap"><table><thead><tr><th>База / система</th><th>Что получаем</th><th>Как использовать</th><th>Доступ и доказательство</th></tr></thead><tbody>
+      <tr><td><a href="https://fgiscs.minstroyrf.ru/" target="_blank" rel="noopener">ФГИС ЦС Минстроя / ФРСН</a></td><td>Нормы, сметные цены ресурсов, индексы по регионам, ФСНБ-2022</td><td>Подготовка локальной сметы по РИМ и проверка состава строительных работ</td><td><span class="source-grade">Официальный норматив</span> выгрузка/ручной реестр</td></tr>
+      <tr><td><a href="https://base.garant.ru/413969836/" target="_blank" rel="noopener">НЦС 81-02-18-2026</a></td><td>Укрупнённые нормативы для объектов гражданской авиации</td><td>Инвестиционный ориентир до детализации; аналог не равен дронопорту</td><td><span class="source-grade">Нормативный документ</span> 2026</td></tr>
+      <tr><td><a href="https://zakupki.gov.ru/" target="_blank" rel="noopener">ЕИС «Закупки»</a></td><td>Извещения, НМЦК, контракты, протоколы, ТЗ и исполнение по 44-ФЗ/223-ФЗ</td><td>Собирать аналоги строительства, зарядки, связи, сервиса и техники</td><td><span class="source-grade">Официальные контракты</span> цена заявки ≠ итоговая цена</td></tr>
+      <tr><td><a href="https://torgi.gov.ru/" target="_blank" rel="noopener">ГИС «Торги»</a></td><td>Торги на землю, права аренды, недвижимость</td><td>Первичная оценка права на земельный участок; сопоставлять условия и сроки</td><td><span class="source-grade">Официальные лоты</span> без гарантий доступности</td></tr>
+      <tr><td><a href="https://nspd.gov.ru/map" target="_blank" rel="noopener">НСПД / кадастровая карта</a></td><td>Участки, ограничения и кадастровые слои</td><td>Проверка land feasibility до расчёта стройки</td><td><span class="source-grade">Госгеоданные</span> требуется правовая проверка</td></tr>
+      <tr><td><a href="https://fgistp.economy.gov.ru/" target="_blank" rel="noopener">ФГИС ТП</a></td><td>Документы территориального планирования</td><td>Предварительно проверять градостроительные ограничения и функциональные зоны</td><td><span class="source-grade">Госсистема</span> далее региональные ИСОГД</td></tr>
+      <tr><td><a href="https://rosstat.gov.ru/vpn/2020/Tom1_Chislennost_i_razmeshchenie_naseleniya" target="_blank" rel="noopener">Росстат / ВПН</a></td><td>Население и год наблюдения</td><td>Ключевой вход гравитационной модели спроса</td><td><span class="source-grade">Наблюдения</span> не заменять фиктивными потоками</td></tr>
+      <tr><td><a href="https://rosstat.gov.ru/databases" target="_blank" rel="noopener">БД ПМО / ЕМИСС</a></td><td>Муниципальные индикаторы</td><td>Ковариаты спроса и контроль реалистичности оценок</td><td><span class="source-grade">Официальная статистика</span> детализация не до всех сёл</td></tr>
+      <tr><td><a href="https://www.nalog.gov.ru/opendata/7707329152-fias/" target="_blank" rel="noopener">ФИАС / ГАР</a></td><td>Идентификаторы и реестр поселений</td><td>Отбор по буквам и трём субъектам, устранение дублей</td><td><span class="source-grade">Открытый адресный реестр</span></td></tr>
+      <tr><td>Региональные ИСОГД, тарифные органы, Россети</td><td>Местные градусловия, стоимость подключения и электроснабжения</td><td>В каждом site dossier — ссылка на документ или полученное КП, срок действия</td><td><span class="source-grade estimated">Региональный уровень</span> нужно запросить</td></tr>
+      <tr><td><a href="https://www.favt.gov.ru/dejatelnost-sertificatsia-aviacionnoi-tehniki/" target="_blank" rel="noopener">Росавиация / требования</a></td><td>Сертификация техники, правила пригодности и допуска</td><td>Отдельный regulatory gate, не использовать как источник цен</td><td><span class="source-grade noquote">Обязательная проверка</span> для реального запуска</td></tr>
+      </tbody></table></div>
+      <div class="note warn"><strong>Не делать ложную точность:</strong> норматив строительства, сумма объявления закупки, цена заключённого контракта и предложение продавца — разные типы данных. Сохранять их раздельно и приводить к единой базе цен, единицам, составу и периоду только после верификации.</div>
+    </section>
+
+    <section id="procurement-i">
+      <div class="eyebrow">Sourcing desk · пример поисковых запросов</div><h2>Где искать закупочные цены и поставщиков в России</h2>
+      <p>Главный официальный источник истории государственных и корпоративных закупок — <a href="https://zakupki.gov.ru/" target="_blank" rel="noopener">ЕИС</a>. ЭТП и агрегаторы полезны как дополнительные интерфейсы поиска и получения коммерческих предложений. Наличие объявления о покупке не доказывает факт поставки; проверяем реестр контрактов и исполнение.</p>
+      <div class="procure-list">
+        <div class="procure-item"><div><span class="source-grade">Официально</span><h3>ЕИС закупки · 44-ФЗ / 223-ФЗ</h3><a href="https://zakupki.gov.ru/" target="_blank" rel="noopener">zakupki.gov.ru</a></div><div><p><b>Ищем:</b> вертолётная площадка, строительство ВПП, модульное здание, технологическое присоединение, зарядная станция, аэродромное оборудование, пожарная сигнализация, связь, обслуживание БВС. Фильтры: Московская, Смоленская, Тверская; с 2023 по 2026; исполненные договоры; цена и количество.</p></div></div>
+        <div class="procure-item"><div><span class="source-grade">Земля / аренда</span><h3>ГИС «Торги»</h3><a href="https://torgi.gov.ru/" target="_blank" rel="noopener">torgi.gov.ru</a></div><div><p><b>Ищем:</b> предоставление земельного участка, аренда, торги по субъекту и муниципалитету. Цена лота не равна цене готовой пригодной площадки; дополнительно сверить ЕГРН, ограничения и виды разрешённого использования.</p></div></div>
+        <div class="procure-item"><div><span class="source-grade">Федеральная ЭТП</span><h3>РТС-тендер, Росэлторг, Сбербанк-АСТ</h3><div><a href="https://www.rts-tender.ru/" target="_blank" rel="noopener">rts-tender.ru</a> · <a href="https://www.roseltorg.ru/" target="_blank" rel="noopener">roseltorg.ru</a> · <a href="https://www.sberbank-ast.ru/" target="_blank" rel="noopener">sberbank-ast.ru</a></div></div><div><p><b>Ищем:</b> лоты с ТЗ и приложениями, сметные расчёты, закупки строительных организаций, аренда техники, электрооборудование. Не считать одно и то же объявление из ЕИС и ЭТП за два разных наблюдения.</p></div></div>
+        <div class="procure-item"><div><span class="source-grade">Другие ЭТП</span><h3>ТЭК-Торг, ЭТП ГПБ, Фабрикант, ZakazRF</h3><div><a href="https://www.tektorg.ru/" target="_blank" rel="noopener">tektorg.ru</a> · <a href="https://etpgpb.ru/" target="_blank" rel="noopener">etpgpb.ru</a> · <a href="https://fabrikant.ru/" target="_blank" rel="noopener">fabrikant.ru</a> · <a href="https://www.zakazrf.ru/" target="_blank" rel="noopener">zakazrf.ru</a></div></div><div><p><b>Ищем:</b> кабель, силовые шкафы, преобразователи, зарядку, инфраструктуру и инженерные работы; по 223-ФЗ и коммерческим секциям полезны запросы цен у поставщиков.</p></div></div>
+        <div class="procure-item"><div><span class="source-grade estimated">Коммерческие закупки / аналитика</span><h3>B2B-Center, Seldon, Контур.Закупки</h3><div><a href="https://www.b2b-center.ru/search/" target="_blank" rel="noopener">b2b-center.ru</a> · <a href="https://seldongroup.ru/" target="_blank" rel="noopener">seldongroup.ru</a> · <a href="https://zakupki.kontur.ru/" target="_blank" rel="noopener">zakupki.kontur.ru</a></div></div><div><p><b>Использование:</b> широкий поиск, уведомления и коммерческие аналоги. Условия доступа, права на выгрузку и автоматический сбор проверяются отдельно. Для конечной цены предпочитать первичный договор или верифицированное КП.</p></div></div>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="card"><h3>Поисковые словари для procurement ETL</h3><div class="search-terms">строительство вертолётной площадки; площадка вертикального взлёта; объект гражданской авиации; технологическое присоединение электроустановок; модульное здание КПП; силовое электрооборудование; станция зарядки; система пожаротушения; охрана периметра; наземная станция управления БВС; беспилотное воздушное судно; техобслуживание авиационной техники</div></div>
+        <div class="card"><h3>Какие цены уже удалось подтвердить</h3><p><b>НЦС-2026:</b> 31,88 млн ₽ за сопоставимый элемент аэродромного строительства, не за весь объект.</p><p><b>Пример закупки:</b> № 0373200081226000356 — поставка/монтаж автомобильных зарядных станций, НМЦК 3,878 млн ₽. Это пример <i>схемы поиска цен</i>, не цена авиационной зарядки и не исполненный контракт.</p><p><b>Десятиместный дрон:</b> проверенной цены и доступного серийного предложения не установлено; требуется RFI/RFQ от производителей. <a href="https://poisktenderov.ru/item/0373200081226000356/" target="_blank" rel="noopener">Пример тендера</a></p></div>
+      </div>
+    </section>
+
+    <section id="finance-pipeline-i">
+      <div class="eyebrow">FinOps + procurement intelligence · traceability</div><h2>Сквозной pipeline данных о стоимости</h2>
+      <div class="flowgrid">
+        <div class="node"><div class="node-id">COST A</div><h3>Поиск и запросы</h3><p>ФГИС ЦС / НЦС, ЕИС, ГИС Торги, НСПД, ИСОГД, КП. Ключевые слова, регион, диапазон дат, категории.</p></div>
+        <div class="node"><div class="node-id">COST B</div><h3>Evidence / Bronze</h3><p>Снимок страниц, номер закупки/контракта, ТЗ, состав лота, дата, источник, доступ, checksum.</p></div>
+        <div class="node"><div class="node-id">COST C</div><h3>Price / Silver</h3><p>НМЦК ≠ итог; деление на количество; НДС, год, регион, конфигурация и объём работ; контроль аналогов.</p></div>
+        <div class="node"><div class="node-id">COST D</div><h3>Cost / Gold</h3><p>CAPEX/OPEX, нижняя/центральная/верхняя оценка, статус доказательства, срок действия цены.</p></div>
+        <div class="node"><div class="node-id">COST E</div><h3>Site dossier</h3><p>Кадастр, ВРИ, мощность сетей, ограничения, землеотвод, проектный состав, инженерная пригодность.</p></div>
+        <div class="node"><div class="node-id">COST F</div><h3>Year planner</h3><p>3 транша по 1 млрд ₽, ввод объектов, закупки, OPEX действующих активов, перенос и аудит.</p></div>
+        <div class="node"><div class="node-id">COST G</div><h3>Optimization loop</h3><p>Выбор локаций и числа дронов по завершённым поездкам при ограничениях бюджета, времени и спроса.</p></div>
+        <div class="node"><div class="node-id">COST H</div><h3>Decision output</h3><p>Сметы по объектам, контракты-аналоги, заявки на КП, бюджет по годам, сценарии, зоны риска.</p></div>
+      </div>
+      <div class="grid two" style="margin-top:17px"><div class="card"><h3>Минимальная схема price_evidence</h3><div class="data-fields"><code>source_url</code><code>notice_id</code><code>contract_id</code><code>category</code><code>amount_rub</code><code>quantity</code><code>vat_status</code><code>region</code><code>published_at</code><code>price_type</code><code>status</code><code>spec_fingerprint</code><code>license</code></div><p style="margin-top:10px" class="tiny">Цены без объёма, конфигурации и статуса не становятся закупочной стоимостью одного объекта.</p></div><div class="card"><h3>Кто нужен</h3><p><strong>Data Engineer / GIS:</strong> адреса, выгрузки, контракты и дедупликация. <strong>Сметчик/инженер ПТО:</strong> ФГИС ЦС, РИМ, проектная смета. <strong>Закупщик:</strong> поиск аналогов и запросы КП. <strong>OR Engineer:</strong> годовые балансы и оптимизатор. Для учебного варианта роли можно совмещать; для реальных строительных решений компетенция сметчика обязательна.</p></div></div>
+      <div class="note"><strong>Без недостоверного «парсинга всего интернета»:</strong> у государственных систем и ЭТП разные условия автоматизации, авторизации и выгрузки. Коннектор делается только после проверки разрешённого способа доступа; для MVP достаточно контролируемого ручного реестра доказательств + полуавтоматической нормализации документов.</div>
+    </section>
+
+    <section id="timeline-i">
+      <div class="eyebrow">Deployment schedule · три финансовых года</div><h2>Строительство, закупки и ввод объектов по годам</h2>
+      <p>Ниже <strong>иллюстративная поэтапная стратегия</strong>, не оптимальное решение: конкретные 8 площадок ещё должен выбрать solver по данным и требованиям безопасности. В отличие от программного roadmap, это календарь физических активов. Условие «начать в первом году» выполнено.</p>
+      <div class="year-cards">
+        <div class="year-card"><span class="pill good">Финансовый год 1</span><h3>Запуск первой работающей сети</h3><small>3 базы · покупка 2 дронов · до 1 млрд ₽</small>
+          <div class="quarter"><b>Q1</b> · Полный геореестр варианта И, оценка спроса, shortlist 6–10 участков, юридическая и авиационная проверка</div>
+          <div class="quarter"><b>Q2</b> · Проект, подряд на первые три порта, договоры на изготовление/поставку двух аппаратов, ТУ на мощность</div>
+          <div class="quarter"><b>Q3</b> · Строительство, зарядка, приемка, ввод первых объектов и авиационной техники при наличии разрешений</div>
+          <div class="quarter"><b>Q4</b> · Рейсы на типичных сутках, учёт эксплуатационных расходов, корректировка потока</div>
+          <p class="tiny">Пример затрат 990 млн ₽, остаток 10 млн ₽. Если техника не существует в подтверждённой поставке, это только сценарий академической модели; реальная дата ввода не подтверждена.</p></div>
+        <div class="year-card"><span class="pill note">Финансовый год 2</span><h3>Связность и расширение</h3><small>+2 базы · +1 дрон · 1 млрд ₽ новый транш</small>
+          <div class="quarter"><b>Q1</b> · Анализ первого года: неудовлетворённый спрос, отказоустойчивость, слабые узлы</div>
+          <div class="quarter"><b>Q2</b> · Выбор новых узлов по приросту завершённых поездок на рубль, сметы и закупки</div>
+          <div class="quarter"><b>Q3</b> · Строительство двух портов, закупка третьего дрона, расширение зарядки</div>
+          <div class="quarter"><b>Q4</b> · Новый граф маршрутов, эксплуатация пяти объектов, сравнение greedy / MIP / SA</div>
+          <p class="tiny">Пример затрат 790 млн ₽; 10 млн ₽ с прошлого года + 1 млрд ₽, остаток 220 млн ₽.</p></div>
+        <div class="year-card"><span class="pill warn">Финансовый год 3</span><h3>Оптимизация всей сети</h3><small>+3 базы · +1 дрон · 1 млрд ₽ новый транш</small>
+          <div class="quarter"><b>Q1</b> · Робастный пересчёт, проверка доступности всех узлов и рисков обслуживания</div>
+          <div class="quarter"><b>Q2</b> · Закупки, корректировка проектных смет и решений по энергомощности</div>
+          <div class="quarter"><b>Q3</b> · Ввод трёх новых портов и четвёртого дрона</div>
+          <div class="quarter"><b>Q4</b> · Проверенное расписание, стресс-тесты ±30%, 160 км, отказ одного порта; итоговые KPI</div>
+          <p class="tiny">Пример затрат 960 млн ₽; доступно 1220 млн ₽ с переносом, остаток 260 млн ₽.</p></div>
+      </div>
+      <div class="note warn"><strong>Регуляторный gate:</strong> Минтранс сообщает об ограничениях полётов гражданских БВС над большей частью Московской области и частью Тверской. Проверять действующие запреты и процедуры по каждой точке и дате необходимо до любых практических перевозок. Также десятиместный пассажирский аппарат не подтверждён в серийных закупках. Этот roadmap <strong>не является реалистичным обещанием запуска пассажирского сервиса в течение первого года</strong>, а задаёт необходимые шаги условного сценария по учебной модели. <a href="https://mintrans.gov.ru/appeals/faq" target="_blank" rel="noopener">Ответы Минтранса</a> · <a href="https://www.favt.gov.ru/dejatelnost-sertificatsia-aviacionnoi-tehniki/" target="_blank" rel="noopener">Росавиация</a>.</div>
+      <div class="grid two"><div class="card"><h3>Время на программную реализацию</h3><p><strong>Учебный вариант И с бюджетным реестром:</strong> 5–7 недель одному человеку. <strong>Research:</strong> 10–13 недель одному. <strong>Продуктовый MVP:</strong> ориентир 10–14 недель командой из трёх специалистов (см. интерактивный roadmap ниже). Это разработка ПО и данных, <i>не</i> трёхлетнее строительство.</p></div><div class="card"><h3>Обязательный первый milestone</h3><p>До выбора точек доказать полноту исходного списка, бюджетную выполнимость первой сети и готовность хотя бы двух совместимых площадок и первой партии флота к использованию. Без этого график физической реализации считается условным.</p></div></div>
+    </section>
+
+    <section id="solutions">
+      <div class="eyebrow">Reuse before build</div><h2>Какие готовые решения реально использовать</h2>
+      <p>Проверены официальные описания решателей и существующие примеры. <strong>Единого готового движка для всех условий задания не найдено.</strong> Ниже — точное место каждого инструмента и то, чего он не умеет «из коробки».</p>
+      <div class="table-wrap"><table><thead><tr><th>Проект / готовое решение</th><th>Что переиспользуем</th><th>Чего не хватает</th><th>Роль</th></tr></thead><tbody>
+        <tr><td><a href="https://highs.dev/" target="_blank" rel="noopener">HiGHS</a></td><td>Открытый LP/MIP, статус, целочисленность, оценка границ; лицензия MIT</td><td>Самостоятельно описать многоэтапные решения, многотоварные потоки, парк и бюджеты</td><td><span class="pill good">Основной MIP</span></td></tr>
+        <tr><td><a href="https://scipopt.org/" target="_blank" rel="noopener">SCIP / PySCIPOpt</a></td><td>Сильная MIP/MINLP-машина, открытая Apache-2.0 с версии 8.0.3</td><td>Тоже не содержит готовой предметной модели дронопортов</td><td><span class="pill good">MIP альтернатива</span></td></tr>
+        <tr><td><a href="https://developers.google.com/optimization/cp" target="_blank" rel="noopener">OR-Tools CP-SAT</a></td><td>Дискретное расписание, ресурсы площадок, интервалы, ограничение зарядок и времени</td><td>Модель перелётов, пустых перемещений и проверки пассажиропотоков надо построить</td><td><span class="pill good">Верификатор</span></td></tr>
+        <tr><td><a href="https://github.com/PyVRP/PyVRP" target="_blank" rel="noopener">PyVRP</a></td><td>Эвристики VRP, несколько депо, окна, неоднородный флот, pickup-delivery</td><td>Нет прямой постановки трёхлетнего network design + зарядка в каждом узле + OD с пересадками</td><td><span class="pill note">Опциональный модуль</span></td></tr>
+        <tr><td><a href="https://github.com/pbyrnes/facility-location" target="_blank" rel="noopener">facility-location / Pyomo + SCIP</a></td><td>Проверяемый пример MIP и локального поиска с сопоставлением границ и MLflow</td><td>Однопериодная задача размещения, без расписания и пассажирского мультикоммодити-потока</td><td><span class="pill note">Референс кода</span></td></tr>
+        <tr><td><a href="https://github.com/JohannesJanning/evtol_mdo" target="_blank" rel="noopener">eVTOL_MDO</a></td><td>Исследовательские модели энергопотребления, экономики, загрузки eVTOL</td><td>Не готовый оптимизатор транспортной сети; допущения могут не совпадать с 10-местной моделью</td><td><span class="pill warn">R&amp;D</span></td></tr>
+        <tr><td><a href="https://docs.nvidia.com/cuopt/user-guide/latest/introduction.html" target="_blank" rel="noopener">NVIDIA cuOpt</a></td><td>GPU-решение LP, VRP, MIP в beta; сценарии быстрых допустимых решений</td><td>Доказательство MIP-оптимальности ещё развивается; не заменяет точную постановку</td><td><span class="pill warn">После профилирования</span></td></tr>
+      </tbody></table></div>
+      <div class="grid two" style="margin-top:15px"><div class="card"><h3>Математически правильный основной подход</h3><p>Многоэтапное размещение объектов + многотоварный поток + бюджетные ограничения. После выбора сети — отдельная модель расписания, затем проверка и, если нужно, исправление основного плана.</p><div class="tiny">Подходит для сдачи, анализа качества и аудита.</div></div><div class="card"><h3>Чего избегать</h3><p>Не пытаться решить всю задачу одним BFS, A*, VRP-движком или LLM. Поиск пути не выбирает капитальные инвестиции, VRP не моделирует автоматически всю network design-задачу, а LLM не гарантирует выполнимость.</p><div class="tiny">Для каждой найденной конфигурации обязательна общая проверка всех ограничений.</div></div></div>
+    </section>
+
+    <section id="datasets">
+      <div class="section-head"><div><div class="eyebrow">Dataset inventory / data engineering</div><h2>Где брать данные и насколько им доверять</h2></div><div class="controls" id="data-controls"><button class="control active" data-filter="all" aria-pressed="true">Все</button><button class="control" data-filter="core" aria-pressed="false">Обязательные</button><button class="control" data-filter="extra" aria-pressed="false">Дополнения</button></div></div>
+      <div class="grid three" id="data-grid">
+        <article class="card data-card" data-kind="core"><div class="kind">Источник A · первичный реестр</div><h3>ФИАС / ГАР, ФНС</h3><p><strong>Что даёт:</strong> реестр населённых пунктов, адресную иерархию, муниципалитет, уникальные идентификаторы; выгрузки XML.</p><p><strong>Не даёт:</strong> надёжную численность населения и готовую матрицу перевозок; координаты нужно обогащать отдельно.</p><div class="barline"><b>Использование</b><p>Canonical place_id, дедупликация одноимённых населённых пунктов, проверка региона. Полная XML-выгрузка может быть тяжёлой.</p></div><a class="data-link" href="https://www.nalog.gov.ru/opendata/7707329152-fias/" target="_blank" rel="noopener">Официальный источник →</a></article>
+        <article class="card data-card" data-kind="core"><div class="kind">Источник B · географические точки</div><h3>GeoNames — Russia dump</h3><p><strong>Что даёт:</strong> имена, координаты WGS84, типы населённых пунктов, иногда население и варианты написания; бесплатная выгрузка CC BY.</p><p><strong>Ограничения:</strong> значения населения бывают пустыми/устаревшими; нет гарантированного года измерения для каждой цифры.</p><div class="barline"><b>Использование</b><p>Начальный список точек и геокодирование; соединять с ФИАС и Росстатом по региону и идентификационным признакам.</p></div><a class="data-link" href="https://www.geonames.org/export/" target="_blank" rel="noopener">Документация и выгрузки →</a></article>
+        <article class="card data-card" data-kind="core"><div class="kind">Источник C · официальная демография</div><h3>Росстат — ВПН и БД ПМО</h3><p><strong>Что даёт:</strong> наблюдавшуюся численность и методологию; ВПН-2020, таблица 5 охватывает в том числе сельские населённые пункты от 3000 человек, муниципальная база — показатели муниципалитетов.</p><p><strong>Ограничения:</strong> полного единообразного актуального населения всех малых пунктов одной таблицей может не оказаться.</p><div class="barline"><b>Использование</b><p>Приоритетная популяция с population_year и source_id. Для малых пунктов — метка estimate, не скрытая под наблюдением.</p></div><a class="data-link" href="https://rosstat.gov.ru/vpn/2020/Tom1_Chislennost_i_razmeshchenie_naseleniya" target="_blank" rel="noopener">Перепись и XLSX →</a><a class="data-link" href="https://rosstat.gov.ru/storage/mediabank/MUNST.htm" target="_blank" rel="noopener">База муниципалитетов →</a></article>
+        <article class="card data-card" data-kind="core"><div class="kind">Источник D · GIS-покрытие</div><h3>Geofabrik / OpenStreetMap</h3><p><strong>Что даёт:</strong> точки и полигоны населённых пунктов, инфраструктуру, контекст на карте; региональные PBF/GPKG-выгрузки.</p><p><strong>Ограничения:</strong> неполные теги населения, неодинаковая полнота по регионам; ODbL требует соблюдения атрибуции и условий использования производных баз.</p><div class="barline"><b>Использование</b><p>Привязка географии и картографический слой. Дальности перелётов рассчитываются по геодезии, не по дорожному графу.</p></div><a class="data-link" href="https://download.geofabrik.de/russia.html" target="_blank" rel="noopener">Региональные выгрузки →</a></article>
+        <article class="card data-card" data-kind="extra"><div class="kind">Источник E · оценка населения</div><h3>GHSL GHS-POP / WorldPop</h3><p><strong>Что даёт:</strong> сеточные оценки населения. GHS-POP содержит эпоху 2025 (проекция), WorldPop — российский растровый слой 2020.</p><p><strong>Ограничения:</strong> это модели распределения жителей, не наблюдения непосредственно в каждом населённом пункте.</p><div class="barline"><b>Использование</b><p>Fallback при пропусках, сравнение чувствительности и сигнал об аномалиях; агрегировать растр к границам/буферу аккуратно.</p></div><a class="data-link" href="https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php" target="_blank" rel="noopener">GHS-POP →</a><a class="data-link" href="https://hub.worldpop.org/geodata/summary?id=29713" target="_blank" rel="noopener">WorldPop Russia →</a></article>
+        <article class="card data-card" data-kind="extra"><div class="kind">Источник F · административная геометрия</div><h3>geoBoundaries / Natural Earth</h3><p><strong>Что даёт:</strong> геометрию регионов и районов, возможность пространственного соединения населённых пунктов с территорией варианта.</p><p><strong>Ограничения:</strong> выбор версий и лицензий требует проверки; при спорных границах придерживаться состава регионов из задания.</p><div class="barline"><b>Использование</b><p>Фильтрация по областям, валидация координат, визуальные границы. geoBoundaries имеет открытые варианты с атрибуцией.</p></div><a class="data-link" href="https://www.geoboundaries.org/" target="_blank" rel="noopener">Открытые границы →</a></article>
+        <article class="card data-card" data-kind="extra"><div class="kind">Источник G · инженерные параметры</div><h3>Публичные спецификации eVTOL</h3><p><strong>Что даёт:</strong> порядок величин по скорости, местам и дальности. Публичный Joby: пилот + 4 пассажира, до 100 миль; это существенно отличается от кейса.</p><p><strong>Ограничения:</strong> не переносить цену и цикл зарядки прямо на десятиместный аппарат.</p><div class="barline"><b>Использование</b><p>Только sanity-check и диапазоны чувствительности. Все неизвлечённые из задания величины — явно учебные допущения.</p></div><a class="data-link" href="https://www.jobyaviation.com/technology" target="_blank" rel="noopener">Спецификации Joby →</a></article>
+        <article class="card data-card" data-kind="extra"><div class="kind">Источник H · витрина с координатами</div><h3>«Если быть точным»: census 2021</h3><p><strong>Что даёт:</strong> готовый CSV/XLSX с численностью и обогащёнными координатами для пунктов от 3000 жителей.</p><p><strong>Ограничения:</strong> набор не обновляется и не покрывает всех малых населённых пунктов.</p><div class="barline"><b>Использование</b><p>Ускорение MVP и сверка координат; происхождение численности отделять от геокодирования сторонним сервисом.</p></div><a class="data-link" href="https://tochno.st/datasets/settlements" target="_blank" rel="noopener">Готовый CSV / XLSX →</a></article>
+        <article class="card data-card" data-kind="core"><div class="kind">Источник I · то, чего нет готового</div><h3>Матрица OD-потоков</h3><p><strong>Готовый универсальный датасет:</strong> не выявлен в проверенных открытых источниках для выбранных населённых пунктов и трёх лет.</p><p><strong>Решение:</strong> прозрачная гравитационная генерация Q(o,d,t) с версионированием параметров, различием направлений, округлением и анализом чувствительности.</p><div class="barline"><b>Использование</b><p>Синтетика допустима по условию PDF, но не называется фактическим прогнозом. Не калибровать спрос под красивый итог оптимизации.</p></div><span class="tiny">Основание: PDF, с. 7</span></article>
+      </div>
+      <div class="note warn"><strong>Сложнейшая часть Data Engineering:</strong> стыковка одного населённого пункта сразу в ФИАС, GeoNames, Росстате и GIS с сохранением года измерения населения. Смена источника или метода импутации должна создавать новую версию набора, а не переписывать старую.</div>
+    </section>
+
+    <section id="pipeline">
+      <div class="eyebrow">Data pipeline → Optimization pipeline → Product output</div><h2>Сквозной вычислительный конвейер</h2>
+      <p>Каждый этап хранит вход, выход и контроль качества. Нельзя переходить от красивой карты напрямую к результатам без формальной проверки расписания.</p>
+      <div class="flowgrid">
+        <div class="node"><div class="node-id">PIPE 01</div><h3>Ingest / Bronze</h3><p>ФИАС XML, GeoNames TXT, Росстат XLSX, OSM/GIS. Снимки файлов, контрольные суммы, дата загрузки и лицензия.</p></div>
+        <div class="node"><div class="node-id">PIPE 02</div><h3>Resolve / Silver</h3><p>Нормализация названий, region/municipality, геокодирование, дублеты, provenance, population_year.</p></div>
+        <div class="node"><div class="node-id">PIPE 03</div><h3>Variant / Graph</h3><p>Фильтр по буквам, 30–80 пунктов, 8–12 малых; матрица расстояний, рёбра ≤200/160 км, связность.</p></div>
+        <div class="node"><div class="node-id">PIPE 04</div><h3>Demand / Gold</h3><p>Направленный Q(o,d,t), допущения, календарный год, сценарии спроса; аудит суммы и нулевых потоков.</p></div>
+        <div class="node"><div class="node-id">PIPE 05</div><h3>Network Optimizer</h3><p>Greedy, MIP, локальный поиск; три года, открытие портов, флот, расходы, OD-flow, lower/upper bound.</p></div>
+        <div class="node"><div class="node-id">PIPE 06</div><h3>Schedule Validator</h3><p>CP-SAT/интервалы. Зарядки, время, базирование, порожние рейсы и 10 мест на каждом участке.</p></div>
+        <div class="node"><div class="node-id">PIPE 07</div><h3>Robust / Experiments</h3><p>Спрос ±30%, дальность 160 км, худший отказ, minimax, бюджетные кривые, 10 seed, статистика.</p></div>
+        <div class="node"><div class="node-id">PIPE 08</div><h3>Decision Cockpit</h3><p>Карты по годам, KPI, сценарии, Fleet & Budget Ledger, выгрузки, аудит метода и версии данных.</p></div>
+      </div>
+      <div class="subflow"><div><b>Если расписание выполнимо</b>Зафиксировать рейсы, загрузку, затраты и завершённые OD-поездки.</div><div style="text-align:center;color:#a8dceb"><strong>Optimizer → Schedule feasibility → Audit</strong><br>при нарушении вернуться в оптимизацию</div><div><b>Если расписание нарушено</b>Получить объяснение конфликта, добавить ограничения или скорректировать флот/потоки.</div></div>
+      <div class="grid two" style="margin-top:14px">
+        <div class="card"><h3>Обязательные data quality gates</h3><ul><li>У каждого пункта устойчивый ID, допустимые координаты и регион.</li><li>Буквенный фильтр применён ко всем хабам, включая пересадочные.</li><li>Численность неотрицательная, год и тип происхождения заданы.</li><li>Сумма OD-потоков воспроизводима по seed и версии параметров.</li><li>Каждое ребро ≤200 км и принадлежит выбранной сети.</li></ul></div>
+        <div class="card"><h3>Обязательные optimization gates</h3><ul><li>Для каждого OD: выполнено ≤ заявленного спроса.</li><li>Для каждого плеча: поток ≤ 10 × число рейсов.</li><li>Бюджет проверен отдельно за годы 1, 2 и 3 накопительно.</li><li>Дроны возвращаются к исходному суточному распределению.</li><li>Подсчёт поездок не дублирует транзитных пассажиров.</li></ul></div>
+      </div>
+    </section>
+
+    <section id="models">
+      <div class="eyebrow">Strategy chooser</div><h2>Три разумные конфигурации решения</h2>
+      <p>Переключи профиль. От него зависят архитектура, состав работ и оценки в дорожной карте ниже.</p>
+      <div class="controls" id="profile-controls"><button class="control active" data-profile="fast" aria-pressed="true">A · Учебная сдача</button><button class="control" data-profile="research" aria-pressed="false">B · Сильное исследование</button><button class="control" data-profile="product" aria-pressed="false">C · Product MVP</button></div>
+      <div class="profile-summary"><div class="card featured"><span class="pill good" id="profile-label">Базовая рекомендация</span><h3 class="profile-heading" id="profile-name">Submission-ready CPU</h3><p id="profile-description">Полностью выполняет обязательные требования PDF. Без сложного сервера и без тяжёлого веб-сервиса. Главные инвестиции — корректные данные, математическая постановка, расписание и воспроизводимые эксперименты.</p><div class="profile-metrics"><div class="metric"><b id="profile-days">15–20</b><span>чел.-дней</span></div><div class="metric"><b id="profile-weeks">3–4</b><span>календарных недель, один человек</span></div><div class="metric"><b id="profile-hardware">CPU</b><span>основной compute</span></div></div></div><div class="card"><h3>Что включено</h3><ul id="profile-included"></ul><div class="note" style="margin-bottom:0"><strong>Граница готовности:</strong> <span id="profile-boundary"></span></div></div></div>
+      <div class="note warn">Оценки предполагают одного выбранного варианта, доступность открытых выгрузок, 8 часов работы в день, без разработки реального авиасервиса. Это плановая оценка, не измеренные runtime и не обещание сроков.</div>
+    </section>
+
+    <section id="features">
+      <div class="eyebrow">Product differentiation</div><h2>На какие фичи давить, чтобы получить сильный продукт</h2>
+      <div class="features">
+        <div class="feature"><div class="feature-index">F1</div><div><h3>Explainable Network Planner</h3><p>Не просто карта, а объяснение, почему открыт каждый узел: прирост завершённых OD-поездок, стоимость, роль как пересадочного хаба, влияние на связность.</p><div class="meta-line">P0 · главное конкурентное преимущество</div></div></div>
+        <div class="feature"><div class="feature-index">F2</div><div><h3>What-if Studio</h3><p>Ползунки бюджета, спроса и дальности; выключение узла; мгновенное переключение на сохранённые сценарии или запуск пересчёта.</p><div class="meta-line">P0 · демонстрация на защите</div></div></div>
+        <div class="feature"><div class="feature-index">F3</div><div><h3>Feasibility Certificate</h3><p>У каждого результата есть отчёт о бюджете, дальности, спросе, вместимости, зарядке, дислокации и выполнимом расписании. Без него результат помечается кандидатом.</p><div class="meta-line">P0 · отличает от красивых оптимизаций</div></div></div>
+        <div class="feature"><div class="feature-index">F4</div><div><h3>Доказуемое сравнение методов</h3><p>Greedy против MIP против собственного поиска: одинаковые данные, статус решателя, bound/gap, качество и время; 10 seed и анализ разброса.</p><div class="meta-line">P0 · обязательное исследование</div></div></div>
+        <div class="feature"><div class="feature-index">F5</div><div><h3>Data Trust / Provenance</h3><p>В каждой точке и коэффициенте доступны источник, год, тип наблюдения, дата загрузки, качество сопоставления и влияние замены данных.</p><div class="meta-line">P0 · блок Data Engineering</div></div></div>
+        <div class="feature"><div class="feature-index">F6</div><div><h3>Трёхлетний budget/fleet ledger</h3><p>Инвестиции, ввод по годам, число дней эксплуатации, перенос остатков, флот, пустые рейсы, операционные затраты и кумулятивный лимит.</p><div class="meta-line">P0 · бизнес-логика</div></div></div>
+        <div class="feature"><div class="feature-index">F7</div><div><h3>Robustness Frontier</h3><p>Торговля «максимум в базе» против «максимум в худшем сценарии»: Pareto-диаграмма, худший отказ, цена устойчивости, worst-case.</p><div class="meta-line">P1 · научная сильная сторона</div></div></div>
+        <div class="feature"><div class="feature-index">F8</div><div><h3>Flight Timeline Viewer</h3><p>Gantt для каждого дрона, занятость площадок, слоты зарядки, пересадки и порожние перемещения; причины конфликтов.</p><div class="meta-line">P1 · операционная прозрачность</div></div></div>
+        <div class="feature"><div class="feature-index">F9</div><div><h3>Scenario Benchmark Registry</h3><p>Версионирование набора данных и модели, условия прогона, seed, commit, лимит времени, статус, выгрузка таблиц для статьи или отчёта.</p><div class="meta-line">P1 · воспроизводимый research</div></div></div>
+        <div class="feature"><div class="feature-index">F10</div><div><h3>Decision Assistant с guardrails</h3><p>LLM может объяснять результаты на основе проверенных JSON и логов, но не назначает маршруты и не меняет числа. Не требуется для первой версии.</p><div class="meta-line">P2 · отдельный опциональный AI-модуль</div></div></div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="eyebrow">Incremental system design</div><h2>Техническая архитектура без лишней инфраструктуры</h2>
+      <div class="arch"><div class="arch-row"><div class="arch-block"><small>Presentation</small><strong>Streamlit → React / MapLibre</strong><p>На старте одна интерактивная аналитическая страница. В продукте — фронтенд с картами, сравнением сценариев и расписанием.</p></div><div class="arch-block"><small>API &amp; orchestration</small><strong>CLI → FastAPI + job queue</strong><p>На старте прямой вызов Python-пакета. Затем jobs, прогресс, idempotency, очередь сценариев, логирование и API.</p></div><div class="arch-block"><small>Compute</small><strong>NetworkX + HiGHS/SCIP + CP-SAT</strong><p>Граф и OD, оптимизация локаций, проверка расписания; эвристики и многократные эксперименты.</p></div></div><div class="arch-arrow">↓ входные версии / ↑ результаты и сертификаты</div><div class="arch-row"><div class="arch-block"><small>Raw / Bronze</small><strong>Файлы + SHA-256 + manifest</strong><p>Неизменяемые исходники, дата выгрузки, лицензии и справочники; без тяжёлого data lake на старте.</p></div><div class="arch-block"><small>Silver / Gold</small><strong>Parquet + DuckDB</strong><p>Нормализованные точки, directed OD, граф и результаты. При многопользовательской работе — PostgreSQL/PostGIS.</p></div><div class="arch-block"><small>Experiment store</small><strong>CSV / JSON → MLflow</strong><p>Запуски, параметры, модели, артефакты, графики, версии данных; MLflow только при росте объёма экспериментов.</p></div></div></div>
+      <div class="grid three" style="margin-top:15px"><div class="card"><h3>Первый релиз</h3><p>Python 3, pandas/polars, GeoPandas, GeographicLib, NetworkX, highspy/PySCIPOpt, OR-Tools, Plotly, Streamlit, pytest. SQLite или DuckDB вполне достаточно.</p></div><div class="card"><h3>После роста</h3><p>FastAPI, PostGIS, очередь задач (RQ/Celery), объектное хранилище, контейнеризация, healthchecks, CI, авторизация. Подключать по фактической потребности.</p></div><div class="card"><h3>Оборудование</h3><p>Для типового варианта сначала ноутбук/серверный CPU с 16–32 ГБ RAM. RTX 3090 с 24 ГБ VRAM не нужна для основных алгоритмов. Тест cuOpt — только отдельный benchmark.</p></div></div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-head"><div><div class="eyebrow">Execution plan</div><h2>Roadmap: работы, результаты, критический путь</h2><p>Список этапов переключается вместе с выбранной конфигурацией. Число исполнителей влияет на календарную оценку, но не изменяет обязательные проверки.</p></div><div class="controls"><button class="button-secondary" id="export-roadmap">Скачать roadmap.csv</button><button class="button-secondary" id="print">Печать / PDF</button></div></div>
+      <div class="roadmap-layout"><div class="stage-list" id="stage-list"></div><aside class="summary-block"><span class="eyebrow">Estimate</span><div class="bigval" id="roadmap-total">20</div><div class="micro">экспертных человеко-дней по этапам</div><div class="summary-row"><b id="roadmap-duration">4–5 недель</b><span>оценка календарной длительности</span></div><div class="select-row"><label for="team-size">Исполнителей:</label><select id="team-size"><option value="1">1 человек</option><option value="2">2 человека</option><option value="3">3 человека</option></select></div><div class="summary-row"><b id="roadmap-cost">Без GPU</b><span>основные вычисления на CPU</span></div><div class="summary-row"><b>Главный блокер</b><span>Нет цены/серийной доступности десятиместных аппаратов; отдельный барьер — ограничения воздушного пространства и OD-данные</span></div><p class="tiny" style="margin:18px 0 0">Оценка: 5 рабочих дней в неделе, частичная параллелизация. Зависимости и переделки могут увеличить сроки на 20–40%.</p></aside></div>
+    </section>
+
+    <section id="roles">
+      <div class="eyebrow">Delivery organization</div><h2>Когда действительно нужен Data Engineer</h2>
+      <div class="grid two"><div class="card featured"><span class="pill good">Для учебной версии</span><h3>Отдельный DE необязателен</h3><p>С одним вариантом и 30–80 пунктами инженер данных может быть совмещён с Python/OR-разработчиком. Основная нагрузка — сбор 4 источников, сверка одноимённых пунктов, протокол обработки пропусков.</p><p><strong>Оценка:</strong> 5–9 человеко-дней DE-задач по географии и ценовым доказательствам внутри общего плана.</p></div><div class="card"><span class="pill note">Для продукта</span><h3>Data Engineer становится оправдан</h3><p>Если нужно несколько регионов, регулярные обновления, надёжная связка ФИАС–Росстат–GeoNames, data lineage, версионирование выгрузок и ETL, DE сэкономит время OR-инженера.</p><p><strong>Оценка:</strong> 16–24 человеко-дней первичной разработки геоданных, смет и procurement ETL плюс поддержка обновлений.</p></div></div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Роль</th><th>Главная зона ответственности</th><th>На каком этапе</th><th>Когда выделять отдельно</th></tr></thead><tbody>
+        <tr><td>Сметчик / инженер ПТО</td><td>ФГИС ЦС, НЦС, РИМ, ведомости объёмов работ, исключение двойного учёта</td><td>С момента выбора реальных площадок</td><td>Обязательно при переходе от учебных цен к инженерным инвестиционным решениям</td></tr>
+        <tr><td>Закупщик / analyst</td><td>ЕИС, ЭТП, запрос КП, подтверждение сопоставимости и цены поставки</td><td>Реестр цен, договоры и верификация поставщиков</td><td>На этапе фактических закупок; в MVP совмещается с DE/аналитиком</td></tr>
+        <tr><td>Data Engineer / GIS</td><td>Выгрузки, поля, entity resolution, атрибуция, метаданные, DQ, spatial joins</td><td>Сразу на ingest → Silver</td><td>Больше одного региона/регулярное обновление/неоднородные данные</td></tr>
+        <tr><td>Operations Research Engineer</td><td>Математическая модель, MIP, greedy/SA, CP-SAT, bounds, верификация</td><td>Начиная с постановки</td><td>Обязательная профильная компетенция</td></tr>
+        <tr><td>Backend / Platform Engineer</td><td>API запусков, очередь, хранение экспериментов, лимиты, CI, Docker</td><td>С Product MVP</td><td>Многопользовательское использование</td></tr>
+        <tr><td>Frontend / Data Visualization</td><td>Сценарии, трёхлетняя карта, Gantt, сравнение методов</td><td>После стабильного ядра</td><td>Полноценный продуктовый интерфейс</td></tr>
+        <tr><td>Research / QA</td><td>Доказательная корректность, тесты, стресс-сценарии, статистика, регрессии</td><td>На всех стадиях</td><td>Может совмещать OR-инженер при малой команде</td></tr>
+      </tbody></table></div>
+      <div class="note"><strong>Рациональная команда для продуктового MVP:</strong> 1 OR/Python, 1 DE/GIS, 1 full-stack/backend. UI можно сделать на Streamlit и не нанимать отдельного frontend до появления устойчивого API. В расчётах сроков работа специалистов частично параллелится.</div>
+    </section>
+
+    <section id="contracts">
+      <div class="eyebrow">Data contracts / outputs</div><h2>Что подаём на вход и что получаем на выходе</h2>
+      <div class="grid two"><div class="card"><h3>Входные конфигурации</h3><div class="code">config/variant.yaml
+  variant_letter: "д"
+  alphabet: "абвгдежзиклмнопрстуфхцчшщыэюя"
+  years: 3
+  range_km: 200
+  capacity_per_flight: 10
+  yearly_tranche_rub: 1000000000
+  max_nodes: 80
+  min_small_nodes: 8
+  seed: 42
+
+config/assumptions.yaml
+  flight_speed_kmh: ...
+  charge_duration_min: ...
+  capex_port_rub: ...
+  capex_drone_rub: ...
+  operating_days: ...
+  demand_parameters: ...
+  source_or_assumption: ...</div><p class="tiny" style="margin:10px 0 0">Значения с многоточием должны быть определены по источнику либо как учебное допущение до оптимизации.</p></div><div class="card"><h3>Минимальные входные таблицы</h3><div class="code">data/silver/towns.parquet
+place_id, source_ids, name, region,
+municipality, lat, lon, population,
+population_year, population_status,
+source_id, quality_flag
+
+data/gold/od_demand.parquet
+origin_id, destination_id, year,
+demand_trips, method, scenario,
+source_id, units
+
+data/gold/edges.parquet
+origin_id, destination_id,
+distance_km, allowed_200, allowed_160
+
+config/economics.yaml
+port_capex, drone_capex, energy_cost,
+maintenance_cost, staff_cost,
+charging_capacity, opening_date</div><p class="tiny" style="margin:10px 0 0">Поля задают схему: сам PDF не предоставляет готовых значений стоимости/скорости.</p></div></div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Выходной артефакт</th><th>Что хранит</th><th>Кто потребляет</th></tr></thead><tbody>
+        <tr><td>network_by_year.geojson</td><td>Координаты открытых портов, год ввода, маршруты и статус ребра</td><td>Карта и защита</td></tr>
+        <tr><td>investment_fleet_plan.csv</td><td>CAPEX/OPEX по году, ввод объектов, покупки дронов, остаток бюджета</td><td>Руководитель / экономическая часть</td></tr>
+        <tr><td>served_od.parquet</td><td>Завершённые поездки, неудовлетворённый спрос по OD и году</td><td>Аналитика / objective</td></tr>
+        <tr><td>flights_and_schedule.csv</td><td>Рейс, дрон, departure/arrival, пустой/пассажирский, зарядка, количество мест</td><td>Проверка выполнимости</td></tr>
+        <tr><td>solver_report.json</td><td>Метод, статус, incumbent, upper bound, gap, runtime, seed, параметры</td><td>Аудит / сравнение алгоритмов</td></tr>
+        <tr><td>scenario_results.csv</td><td>База, ±30%, дальность 160, худший отказ, robust-решение</td><td>What-if Studio</td></tr>
+        <tr><td>data_manifest.json</td><td>Источники, хэши, время загрузки, лицензия, преобразования, версии</td><td>Data Engineer / reproducibility</td></tr>
+        <tr><td>experiment_report.html + executive_summary.md</td><td>Графики, таблицы, модель, метод, решения, ограничения и рекомендации</td><td>Сдача / презентация</td></tr>
+      </tbody></table></div>
+      <div class="card soft" style="margin-top:16px"><h3>Предлагаемая структура репозитория</h3><div class="code">droneport-planner/
+  config/               # зафиксированные параметры варианта и допущения
+  data/raw/             # неизменяемые снимки источников
+  data/silver/          # нормализованные населённые пункты и качество
+  data/gold/            # граф, спрос и модельные входы
+  src/ingest/           # загрузка и реестр источников
+  src/resolve/          # сопоставление географических объектов
+  src/demand/           # воспроизводимый направленный спрос
+  src/optimization/     # greedy, mip, локальный поиск
+  src/scheduling/       # интервальное расписание и зарядка
+  src/scenarios/        # стресс-тесты и робастная постановка
+  src/validation/       # единый аудит ограничений
+  src/reporting/        # карты, таблицы и готовый отчёт
+  app/                  # интерфейс сценарного планирования
+  tests/                # инварианты, регрессии, малые эталоны
+  runs/                 # метрики, seed, решения, артефакты
+  docs/                 # постановка, допущения, руководство</div></div>
+    </section>
+
+    <section id="risks">
+      <div class="eyebrow">Go / no-go quality</div><h2>Риски, границы применимости, критерии приёмки</h2>
+      <div class="risks"><div class="risk"><div><div class="level">Высокий риск</div><strong>Нет наблюдаемой OD-матрицы</strong></div><div><p>Спрос синтетический, а не фактический. <strong>Митигируем:</strong> фиксируем gravity-параметры до оптимизации, проверяем масштабы, ±30%, две стратегии обработки данных и сохраняем каждую версию спроса.</p></div></div>
+      <div class="risk"><div><div class="level">Высокий риск</div><strong>Расписание не существует</strong></div><div><p>Баланс средних часов не гарантирует реальную последовательность перелётов. <strong>Митигируем:</strong> CP-SAT/дискретно-событийная валидация, зарядные слоты, баланс местоположений, порожние рейсы, корректирующая итерация.</p></div></div>
+      <div class="risk"><div><div class="level">Высокий риск</div><strong>Неверный оптимум</strong></div><div><p>Solver timeout и хороший маршрут — не доказательство глобального оптимума. <strong>Митигируем:</strong> малый экземпляр 8–12, честный статус и bounds; отдельный gap для каждого прогона; сравнение на одинаковых данных.</p></div></div>
+      <div class="risk"><div><div class="level">Средний риск</div><strong>Несовместимые поселения</strong></div><div><p>Одноимённые пункты, неверные муниципалитеты, устаревшее население. <strong>Митигируем:</strong> ФИАС-ID/составной ключ, ручной review сомнительных совпадений, DQ-репорт, снимок исходных данных.</p></div></div>
+      <div class="risk"><div><div class="level">Средний риск</div><strong>Взрыв размерности MIP</strong></div><div><p>OD-переменные на каждом ребре и по годам быстро растут. <strong>Митигируем:</strong> формулировка с ограниченным набором путей для большой задачи, warm start, агрегирование при явной потере точности, лимит времени и отдельные quality bounds.</p></div></div>
+      <div class="risk"><div><div class="level">Стратегический риск</div><strong>Учебная техника ≠ рынок</strong></div><div><p>10 мест и 200 км — входные условия кейса. <strong>Митигируем:</strong> разделить «учебный сценарий» и «инженерную оценку», не заявлять эксплуатационную готовность без технических, экономических и регуляторных подтверждений.</p></div></div></div>
+      <h3 style="margin-top:25px">Чек-лист готового результата <span class="tiny" id="check-count">0 / 12</span></h3>
+      <div class="checklist" id="checks">
+        <label class="check"><input type="checkbox">Задокументированы регионы и алфавит варианта.</label>
+        <label class="check"><input type="checkbox">Собраны полный и малый фиксированные наборы пунктов.</label>
+        <label class="check"><input type="checkbox">Для населения указаны год, тип значения и источник.</label>
+        <label class="check"><input type="checkbox">OD-спрос задан заранее и воспроизводим.</label>
+        <label class="check"><input type="checkbox">Все перемещения ограничены допустимыми рёбрами.</label>
+        <label class="check"><input type="checkbox">Greedy, MIP и свой алгоритм сравниваются честно.</label>
+        <label class="check"><input type="checkbox">BFS и A* сравнены при обоснованной эвристике.</label>
+        <label class="check"><input type="checkbox">В год 1 построены базы и закуплены дроны; перенос и бюджет соблюдены все годы.</label>
+        <label class="check"><input type="checkbox">Составлено выполнимое расписание последнего года.</label>
+        <label class="check"><input type="checkbox">Есть robust, отказ узла, минимакс и альфа-бета.</label>
+        <label class="check"><input type="checkbox">Сделаны 4 типа экспериментов и минимум 10 seed.</label>
+        <label class="check"><input type="checkbox">Есть карты, журнал запусков, отчёт и инструкция запуска.</label>
+      </div>
+    </section>
+
+    <section id="references">
+      <div class="eyebrow">Sources / primary documents</div><h2>Проверенные ссылки и границы исследования</h2>
+      <p>Ниже — первичные страницы проектов и поставщиков данных. Исследование — обзор доступных компонентов, не проведённые на пользовательском оборудовании бенчмарки. Данные источников не скачивались и не очищались в рамках этого HTML-документа.</p>
+      <div class="refs">
+        <div class="ref"><span>01 · Официальный решатель</span><a href="https://highs.dev/" target="_blank" rel="noopener">HiGHS — MIP/LP, MIT license</a></div>
+        <div class="ref"><span>02 · Официальный решатель</span><a href="https://scipopt.org/" target="_blank" rel="noopener">SCIP — MIP/MINLP, Apache-2.0</a></div>
+        <div class="ref"><span>03 · Документация Google</span><a href="https://developers.google.com/optimization/examples" target="_blank" rel="noopener">OR-Tools: расписание и routing</a></div>
+        <div class="ref"><span>04 · Готовый код</span><a href="https://github.com/PyVRP/PyVRP" target="_blank" rel="noopener">PyVRP: capabilities и repository</a></div>
+        <div class="ref"><span>05 · Готовый код</span><a href="https://github.com/pbyrnes/facility-location" target="_blank" rel="noopener">Facility location — Pyomo / SCIP</a></div>
+        <div class="ref"><span>06 · Исследовательский код</span><a href="https://github.com/JohannesJanning/evtol_mdo" target="_blank" rel="noopener">eVTOL MDO — modelling</a></div>
+        <div class="ref"><span>07 · GPU решатель</span><a href="https://docs.nvidia.com/cuopt/user-guide/latest/introduction.html" target="_blank" rel="noopener">NVIDIA cuOpt — MIP beta и ограничения</a></div>
+        <div class="ref"><span>08 · География</span><a href="https://download.geofabrik.de/russia.html" target="_blank" rel="noopener">Geofabrik — Russia OpenStreetMap extracts</a></div>
+        <div class="ref"><span>09 · География / топонимы</span><a href="https://www.geonames.org/export/" target="_blank" rel="noopener">GeoNames — country data, CC BY</a></div>
+        <div class="ref"><span>10 · Официальные данные РФ</span><a href="https://www.nalog.gov.ru/opendata/7707329152-fias/" target="_blank" rel="noopener">ФИАС / ГАР — открытые XML-данные</a></div>
+        <div class="ref"><span>11 · Официальные данные РФ</span><a href="https://rosstat.gov.ru/vpn/2020/Tom1_Chislennost_i_razmeshchenie_naseleniya" target="_blank" rel="noopener">Росстат — перепись, том 1</a></div>
+        <div class="ref"><span>12 · Официальные данные РФ</span><a href="https://rosstat.gov.ru/storage/mediabank/MUNST.htm" target="_blank" rel="noopener">Росстат — БД показателей муниципалитетов</a></div>
+        <div class="ref"><span>13 · Геодемография</span><a href="https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php" target="_blank" rel="noopener">GHSL GHS-POP R2023A</a></div>
+        <div class="ref"><span>14 · Геодемография</span><a href="https://hub.worldpop.org/geodata/summary?id=29713" target="_blank" rel="noopener">WorldPop Russia 2020</a></div>
+        <div class="ref"><span>15 · География / границы</span><a href="https://github.com/wmgeolab/geoBoundaries" target="_blank" rel="noopener">geoBoundaries — лицензии и версии</a></div>
+        <div class="ref"><span>16 · Готовые данные РФ</span><a href="https://tochno.st/datasets/settlements" target="_blank" rel="noopener">Население населённых пунктов от 3000 жителей</a></div>
+        <div class="ref"><span>17 · Технические характеристики</span><a href="https://www.jobyaviation.com/technology" target="_blank" rel="noopener">Joby — 4 пассажира и спецификации</a></div>
+        <div class="ref"><span>18 · GIS библиотека</span><a href="https://osmnx.readthedocs.io/en/stable/getting-started.html" target="_blank" rel="noopener">OSMnx — geographic features</a></div>
+
+        <div class="ref"><span>19 · Официальный контрактный реестр</span><a href="https://zakupki.gov.ru/" target="_blank" rel="noopener">ЕИС: контракты, цены, исполнение</a></div>
+        <div class="ref"><span>20 · Госимущество / земля</span><a href="https://torgi.gov.ru/" target="_blank" rel="noopener">ГИС «Торги»: земельные участки и аренда</a></div>
+        <div class="ref"><span>21 · Нормативы строительства</span><a href="https://fgiscs.minstroyrf.ru/" target="_blank" rel="noopener">ФГИС ЦС: федеральные сметные цены и нормативы</a></div>
+        <div class="ref"><span>22 · Норматив 2026</span><a href="https://base.garant.ru/413969836/" target="_blank" rel="noopener">НЦС-2026: объекты гражданской авиации</a></div>
+        <div class="ref"><span>23 · Геокадастр</span><a href="https://nspd.gov.ru/map" target="_blank" rel="noopener">НСПД: публичная кадастровая карта</a></div>
+        <div class="ref"><span>24 · Территориальное планирование</span><a href="https://fgistp.economy.gov.ru/" target="_blank" rel="noopener">ФГИС ТП: территориальные планы</a></div>
+        <div class="ref"><span>25 · Минтранс</span><a href="https://mintrans.gov.ru/appeals/faq" target="_blank" rel="noopener">Ограничения гражданских БВС в Московской области</a></div>
+        <div class="ref"><span>26 · Сертификация</span><a href="https://www.favt.gov.ru/dejatelnost-sertificatsia-aviacionnoi-tehniki/" target="_blank" rel="noopener">Росавиация: требования к авиационной технике</a></div>
+        <div class="ref"><span>27 · Коммерческие закупки</span><a href="https://www.b2b-center.ru/search/" target="_blank" rel="noopener">B2B-Center: поиск закупок и запросов КП</a></div>
+        <div class="ref"><span>28 · Официальное подтверждение ЕИС</span><a href="https://roskazna.gov.ru/gis/eis-zakupki-gov-ru" target="_blank" rel="noopener">Казначейство: назначение ЕИС</a></div>
+      </div>
+      <div class="note warn" style="margin-top:22px"><strong>Важно о реальном внедрении:</strong> результат этого проекта — расчётно-аналитический инструмент для учебной и исследовательской постановки. Он не является системой диспетчеризации реальных пассажирских дронов и не подтверждает допустимость полётов с точки зрения авиационных правил, безопасности или сертификации.</div>
+    </section>
+    <footer class="foot"><strong>Droneport Network Planner · Product Research &amp; Roadmap</strong><br>Основание: индивидуальный исследовательский проект «Сеть дронопортов России», с. 1–12. Подготовлено 04.11.2026. Оценки трудоёмкости — сценарные и предполагают отсутствие внеплановых блокеров, доступ к данным и стандартный 8-часовой рабочий день.</footer>
+  </main>
+</div>
+<script>
+  /* данные профилей и рабочих этапов */
+  const profiles = {
+    fast: {
+      name: 'Submission-ready CPU', label: 'Базовая рекомендация',
+      description: 'Полностью закрываем критерии задания: данные, направленный спрос, размещение сети, алгоритмы, расписание, робастность и эксперименты. Интерфейс — лёгкая аналитическая страница; без API, контейнерной оркестрации и локальной LLM.',
+      days: '20', weeks: '4–5', hardware: 'CPU', boundary: 'Можно защитить работу и воспроизвести результаты. Не является многопользовательским сервисом.',
+      included: ['Данные и provenance одного варианта', 'Greedy + MIP + свой поиск + BFS/A*', 'CP-SAT расписание и исправление конфликтов', 'Стресс-тесты, минимакс, 10 seed', 'Карта и готовый отчёт'],
+      stages: [
+        ['Вариант, паспорт допущений','Фиксируем регионы, буквы, бюджет, единицы и временную модель','variant.yaml, assumptions.yaml','OR / analyst',2],
+        ['Геоданные и нормализация','ГАР + Росстат + OSM, вариант И, буквы Ж/З/И/К/Л, дедупликация','towns_i.parquet, manifest.json','DE / GIS',4],
+        ['Сметы и бюджет 3×1 млрд','НЦС-2026, реестр сравнительных цен ЕИС, три транша, план стройки и флота','price_evidence.csv, budget_i.csv','Analyst / OR',5],
+        ['Граф и синтетический спрос','Расстояния, связность, 200/160 км, направленная gravity-модель','edges.parquet, od_demand.parquet','Python / OR',2],
+        ['Алгоритмы размещения','Greedy, малая MIP, локальный поиск, BFS/A*, 3-летняя постановка','solver_report.json, plans.csv','OR',4],
+        ['Расписание и аудит','Зарядка, перемещения, численность флота, бюджет по годам','final_year_schedule.csv','OR / QA',3],
+        ['Сценарии и статистика','Отказ узла, робастность, дерево minimax, 4 эксперимента, 10 seed','scenario_results.csv','OR / QA',3],
+        ['Карты и защита','Карта по годам, таблицы, управленческий вывод, инструкция','report.html, README.md','Analyst',2]
+      ]
+    },
+    research: {
+      name:'Research-grade Optimizer',label:'Для сильной защиты и статьи',
+      description:'Расширяем точную модель, формальную проверку качества, качество источников, устойчивость и статистический протокол. Решения сравниваются на неизменных экземплярах; для большой задачи честно показываются верхние оценки и ограничения.',
+      days:'48',weeks:'10–13',hardware:'CPU+',boundary:'Исследовательски сильная модель со статистикой и проверкой, но без полноценного API/SLA.',
+      included:['Все обязательные критерии PDF', 'Улучшенный MIP + warm-start + bounds', 'Сопоставление двух стратегий data cleaning', 'Robust frontier и worst-node stress', 'MLflow / experiment registry и подробные отчёты'],
+      stages:[
+        ['Постановка и test cases','Полные формальные инварианты, базовый и малый эталон','spec.md, acceptance_tests','OR',3],
+        ['Повышенное качество данных','Вариант И: ГАР, регионы, geo QA, спорные совпадения','silver/gold, DQ report','DE / GIS',6],
+        ['Сметно-закупочное исследование','НЦС, ЕИС, НСПД, сравнимые договоры, сценарные цены, финансы по годам','price_book, capex_opex.csv','DE / Budget',8],
+        ['Спрос и сценарии','Несколько стратегий пропусков, калибровочный sanity-check','demand versions, data sheet','DE / OR',4],
+        ['Математическое ядро','Multi-period flow MIP, tight constraints, time limits, bounds','model.mps, solver logs','OR',7],
+        ['Эвристики и сравнительные тесты','Greedy/SA, разные seed, одинаковая проверка допустимости','benchmarks.csv','OR',5],
+        ['Проверка расписания','Итеративный validator, блокировки зарядок и перемещений','schedule, conflicts.json','OR',6],
+        ['Робастность и статистика','Worst-case, дерево игры, budget frontier, paired runs','analysis.ipynb, robust.csv','Research',5],
+        ['Визуализация и упаковка','Карты, паспорта модели, графики, reproducible run','report.html, README.md','Analyst',4]
+      ]
+    },
+    product: {
+      name:'Decision-Support Product MVP',label:'Для пилота внутри лаборатории',
+      description:'Сохраняем математическое ядро и добавляем воспроизводимые ETL, API долгих задач, очередь, сценарное хранилище и интерактивный кабинет. Результат применим к разным регионам и вариантам, но по-прежнему моделирует учебный парк, а не реальные авиаперевозки.',
+      days:'96',weeks:'19–25',hardware:'CPU / server',boundary:'Пилотная платформа для аналитиков. Для реальных пассажирских перевозок потребуется отдельный инженерный и регуляторный проект.',
+      included:['Все требования PDF и research-контур', 'Версионированный ingestion и геодедупликация', 'FastAPI + фоновые jobs + persistent runs', 'What-if Studio, карты, Gantt, сертификаты', 'CI, контейнеры, роли пользователей, monitoring'],
+      stages:[
+        ['Product scope и формальная спецификация','Персоны, сценарии, критерии качества, API-контракты','PRD, architecture.md','Product / OR',5],
+        ['Bronze → Silver → Gold','Коннекторы ГАР, Росстат, OSM, lineage, DQ, версии снимков','ETL, tests, manifest','DE / GIS',12],
+        ['Procurement intelligence / Capex','Сметы ФГИС ЦС, ЕИС, земля, история контрактов, evidence ledger, бюджет 3×1 млрд','price_evidence, budget API','DE / Cost analyst',14],
+        ['Core optimization service','Промышленный слой MIP, эвристики, OD, бюджеты, границы','optimizer package, APIs','OR',12],
+        ['Scheduling / feasibility','CP-SAT, ресурсы, рейсы, loop обратной связи','feasibility service','OR',10],
+        ['Scenario & experiment engine','Робастность, minimax, batch, run registry, метрики','scenario jobs, registry','Research / backend',8],
+        ['Backend / job orchestration','FastAPI, очередь, idempotency, API статусов, хранилище','versioned REST API','Backend',9],
+        ['Decision cockpit','Варианты, карта, Gantt, compare, cost breakdown','web app','Full-stack',11],
+        ['QA / CI / deploy','Unit/integration/regression, тесты инвариантов, Docker, метрики','ci pipeline, runbook','QA / DevOps',9],
+        ['Pilot acceptance','Демо на разных вариантах, benchmark, эксплуатационная документация','pilot report','Team',6]
+      ]
+    }
+  };
+  let current_profile = 'fast';
+  let current_team = 1;
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  const total = stages => stages.reduce((sum, row) => sum + row[4], 0);
+  const rounded = value => (value * 10 + 0.5 | 0) / 10;
+
+  /* переключение режимов и пересчёт загрузки */
+  function render_profile() {
+    const data = profiles[current_profile];
+    $('#profile-label').textContent = data.label;
+    $('#profile-name').textContent = data.name;
+    $('#profile-description').textContent = data.description;
+    $('#profile-days').textContent = data.days;
+    $('#profile-weeks').textContent = data.weeks;
+    $('#profile-hardware').textContent = data.hardware;
+    $('#profile-boundary').textContent = data.boundary;
+    $('#profile-included').innerHTML = data.included.map(item => '<li>' + item + '</li>').join('');
+    $('#stage-list').innerHTML = data.stages.map((stage,index) => `
+      <div class="stage">
+        <div class="stage-index">${String(index + 1).padStart(2,'0')}</div>
+        <div><h3>${stage[0]}</h3><p>${stage[1]}</p><div class="out">Выход: ${stage[2]}</div><small>${stage[3]}</small></div>
+        <div class="days">${stage[4]} дн.<span>чел.-дни</span></div>
+      </div>`).join('');
+    const person_days = total(data.stages);
+    const parallel_efficiency = current_team === 1 ? 1 : current_team === 2 ? 1.6 : 2.1;
+    const integration = current_team === 1 ? 0 : current_team === 2 ? .5 : 1;
+    const base_weeks = person_days / (5 * parallel_efficiency) + integration;
+    const low = rounded(base_weeks);
+    const high = rounded(base_weeks * 1.3);
+    $('#roadmap-total').textContent = person_days;
+    $('#roadmap-duration').textContent = `${low}–${high} нед.`;
+    $('#roadmap-cost').textContent = current_profile === 'product' ? 'CPU / сервер' : 'Без GPU';
+    $$('#profile-controls .control').forEach(button => {
+      const active = button.dataset.profile === current_profile;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  $$('#profile-controls .control').forEach(button => button.addEventListener('click', () => {
+    current_profile = button.dataset.profile;
+    render_profile();
+  }));
+  $('#team-size').addEventListener('change', event => {
+    current_team = Number(event.target.value);
+    render_profile();
+  });
+
+  /* фильтрация источников данных */
+  $$('#data-controls .control').forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    $$('#data-controls .control').forEach(other => {
+      const active = other === button;
+      other.classList.toggle('active',active);
+      other.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    $$('#data-grid .data-card').forEach(card => card.hidden = filter !== 'all' && card.dataset.kind !== filter);
+  }));
+
+  /* экспорт текущего плана в файл */
+  $('#export-roadmap').addEventListener('click', () => {
+    const rows = [['stage','title','work','output','owner','person_days'], ...profiles[current_profile].stages.map((item,index) => [index + 1,...item])];
+    const contents = '\ufeff' + rows.map(row => row.map(value => '"' + String(value).replaceAll('"','""') + '"').join(';')).join('\r\n');
+    const blob = new Blob([contents], {type:'text/csv;charset=utf-8'});
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = 'droneport_roadmap_' + current_profile + '.csv';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+  });
+  $('#print').addEventListener('click', () => window.print());
+
+  /* локальное сохранение отметок приёмки в браузере */
+  const checkboxes = $$('#checks input[type="checkbox"]');
+  try {
+    const saved = JSON.parse(localStorage.getItem('droneport_checks') || '[]');
+    checkboxes.forEach((input,index) => input.checked = saved.includes(index));
+  } catch(error) { /* отсутствие хранилища не мешает интерфейсу */ }
+  function refresh_checks() {
+    const checked = checkboxes.filter(input => input.checked).length;
+    $('#check-count').textContent = `${checked} / ${checkboxes.length}`;
+    try {
+      localStorage.setItem('droneport_checks',JSON.stringify(checkboxes.map((input,index) => input.checked ? index : -1).filter(index => index >= 0)));
+    } catch(error) { /* приватный режим может запрещать сохранение */ }
+  }
+  checkboxes.forEach(input => input.addEventListener('change',refresh_checks));
+  refresh_checks();
+
+  /* подсветка текущего раздела */
+  const links = $$('#nav a');
+  const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(link => link.classList.toggle('active',link.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, {rootMargin:'-10% 0px -70% 0px'});
+    sections.forEach(section => observer.observe(section));
+  }
+  render_profile();
+</script>
+
+<script>
+  const budget_fields = ['ports','drones','survey','tech','opex','risk'];
+  const default_budget = {
+    'unit-port':90,'unit-drone':250,'year-port-opex':12,'year-drone-opex':18,
+    'ports-0':3,'ports-1':2,'ports-2':3,
+    'drones-0':2,'drones-1':1,'drones-2':1,
+    'survey-0':50,'survey-1':50,'survey-2':60,
+    'tech-0':35,'tech-1':40,'tech-2':50,
+    'opex-0':75,'opex-1':180,'opex-2':250,
+    'risk-0':60,'risk-1':90,'risk-2':80
+  };
+  const budget_input = id => document.getElementById(id);
+  const budget_number = id => Math.max(0,Number(budget_input(id).value) || 0);
+  const budget_text = (id,value) => budget_input(id).textContent = value;
+  const budget_fmt = value => Math.round(value * 100) / 100;
+  let latest_budget_rows = [];
+
+  /* Проверяем накопительные ограничения и расходуемые активы */
+  function update_budget() {
+    const port_price = budget_number('unit-port');
+    const drone_price = budget_number('unit-drone');
+    const port_opex = budget_number('year-port-opex');
+    const drone_opex = budget_number('year-drone-opex');
+    let accumulated = 0;
+    let current_ports = 0;
+    let current_drones = 0;
+    let fail_years = [];
+    let opex_warnings = [];
+    let rows = [];
+    for (let year = 0; year < 3; year += 1) {
+      const values = Object.fromEntries(budget_fields.map(field => [field,budget_number(field + '-' + year)]));
+      const build = values.ports * port_price;
+      const fleet = values.drones * drone_price;
+      const mandatory_opex = (current_ports + values.ports * 0.5) * port_opex + (current_drones + values.drones * 0.5) * drone_opex;
+      const annual = build + fleet + values.survey + values.tech + values.opex + values.risk;
+      const available = (year + 1) * 1000 - accumulated;
+      accumulated += annual;
+      const carry = (year + 1) * 1000 - accumulated;
+      current_ports += values.ports;
+      current_drones += values.drones;
+      const valid = carry >= -0.00001;
+      if (!valid) fail_years.push(year + 1);
+      if (values.opex + 0.001 < mandatory_opex) opex_warnings.push(`год ${year + 1}: заложено ${values.opex} млн, нижняя учебная оценка ${budget_fmt(mandatory_opex)} млн`);
+      budget_text('build-cost-' + year,budget_fmt(build));
+      budget_text('fleet-cost-' + year,budget_fmt(fleet));
+      budget_text('total-cost-' + year,budget_fmt(annual));
+      budget_text('available-' + year,budget_fmt(available));
+      budget_text('carry-' + year,budget_fmt(carry));
+      budget_text('cumulative-' + year,budget_fmt(accumulated));
+      budget_text('budget-status-' + year, valid ? 'Допустимо' : 'Превышен лимит');
+      budget_input('budget-status-' + year).className = valid ? 'okay' : 'bad';
+      budget_input('carry-' + year).className = valid ? 'okay' : 'bad';
+      rows.push({year:year + 1,...values,build,fleet,annual,available,carry,cumulative:accumulated,mandatory_opex,valid});
+    }
+    budget_text('all-ports',current_ports);
+    budget_text('all-drones',current_drones);
+    budget_text('all-spend',(accumulated / 1000).toLocaleString('ru-RU',{maximumFractionDigits:3}));
+    budget_text('all-carry',budget_fmt(3000-accumulated));
+    budget_input('all-carry').className = accumulated <= 3000 ? 'okay' : 'bad';
+    const alert = budget_input('budget-alert');
+    alert.classList.toggle('fail',fail_years.length > 0);
+    alert.textContent = fail_years.length
+      ? `Недопустимый сценарий: нарушение финансирования в году ${fail_years.join(', ')}. Нельзя тратить будущий транш, даже если сумма за три года не превышает 3 млрд ₽.`
+      : `Бюджетно допустимо: в первый год запланировано портов: ${rows[0].ports}; закуплено дронов: ${rows[0].drones}, к концу третьего года — ${current_ports} портов и ${current_drones} аппаратов. Каждому году доступен только собственный транш плюс остаток.`;
+    budget_input('opex-check').textContent = opex_warnings.length
+      ? `Недостаточно базового OPEX: ${opex_warnings.join('; ')}. Увеличьте затраты на эксплуатацию.`
+      : 'Учебный нижний порог OPEX выдержан во все годы. Реальная достаточность требует модели рейсов, энергии, персонала и обслуживания.';
+    budget_input('opex-check').className = opex_warnings.length ? 'bad' : 'okay';
+    latest_budget_rows = rows;
+  }
+  Object.keys(default_budget).forEach(id => {
+    const node = budget_input(id);
+    if (node) node.addEventListener('input',update_budget);
+  });
+  budget_input('reset-budget').addEventListener('click',() => {
+    Object.entries(default_budget).forEach(([id,value]) => budget_input(id).value = value);
+    update_budget();
+  });
+
+  /* Экспортируем бюджет для воспроизводимого расчёта */
+  budget_input('export-budget').addEventListener('click',() => {
+    const fields = ['year','ports','drones','survey','tech','opex','risk','build','fleet','annual','available','carry','cumulative','mandatory_opex','valid'];
+    const rows = [fields,...latest_budget_rows.map(row => fields.map(field => row[field]))];
+    const content = '\ufeff' + rows.map(row => row.map(item => '"' + String(item).replaceAll('"','""') + '"').join(';')).join('\r\n');
+    const url = URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'variant_i_three_year_budget.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url),600);
+  });
+  update_budget();
+</script>
+
+</body>
+</html>

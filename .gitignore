@@ -1,0 +1,50 @@
+# Local environments, downloaded tools and caches.
+.venv/
+venv/
+.cache/
+.tools/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Credentials and machine-specific state.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+/environment.json
+/input_inventory.csv
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.~lock.*#
+
+# Large source downloads. Small processed datasets are versioned because
+# the tests and numerical experiments require them after a fresh clone.
+*.osm.pbf
+/data/raw/**
+!/data/raw/**/
+!/data/raw/**/.gitkeep
+/data/cartography/basemap.json.gz
+
+# Generated experiments, reports and packaged deliveries remain local.
+/runs/**
+!/runs/.gitkeep
+/results/**
+!/results/.gitkeep
+/results_v2/**
+!/results_v2/.gitkeep
+/reports/
+/artifacts/
+
+# Downloaded duplicate of the roadmap already present under its original name.
+/droneport_variant_i_budget_roadmap(1).html

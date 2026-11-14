@@ -1,0 +1,42 @@
+{
+  "source_url": "https://fias-file.nalog.ru/downloads/2026.11.03/gar_xml.zip",
+  "version": "2026-11-03",
+  "source_levels": {
+    "2": "Административный район",
+    "5": "Город",
+    "6": "Населенный пункт"
+  },
+  "settlement_types": [
+    "г",
+    "д",
+    "дп",
+    "ж/д рзд",
+    "ж/д ст",
+    "м-ко",
+    "нп",
+    "п",
+    "п/о",
+    "пгт",
+    "рзд",
+    "рп",
+    "с",
+    "сл",
+    "ст",
+    "х"
+  ],
+  "active_official_settlements": 20460,
+  "eligible_official_settlements": 4480,
+  "matched_coordinates": 2093,
+  "unresolved_official_rows": 2387,
+  "osm_unresolved": 1974,
+  "eligible_by_region": {
+    "50": 1248,
+    "67": 1101,
+    "69": 2131
+  },
+  "complete_official_list_for_selected_levels": true,
+  "geographic_crosswalk_complete": false,
+  "missing_population_policy": "preserve_null",
+  "frozen_samples_unchanged": true,
+  "limitation": "Active actual settlement types at levels 2/5/6; includes cities at administrative district level, excludes municipal formations, territories and roads; geographic matching remains partial"
+}

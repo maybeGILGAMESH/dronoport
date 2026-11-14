@@ -1,0 +1,45 @@
+model_version: timed_shuttles_v1
+status: academic_assumptions
+operating_days: 330
+commissioning: start_of_purchase_year
+flight_speed_kmh: 240
+landing_minutes: 5
+charging_minutes: 30
+minimum_transfer_minutes: 10
+day_start_minutes: 480
+slot_minutes: 90
+slots_per_day: 8
+chargers_per_port: 2
+max_movements_per_port_per_slot: 2
+capacity_per_flight: 10
+range_km: 200
+port_capex_rub: 90000000
+aircraft_capex_rub: 250000000
+port_opex_rub_per_year: 12000000
+aircraft_opex_rub_per_year: 18000000
+electricity_rub_per_kwh: 10
+energy_kwh_per_km: 4
+yearly_tranche_rub: 1000000000
+demand:
+  kind: synthetic_gravity
+  K: 0.003
+  alpha: 0.55
+  beta: 0.45
+  distance_scale_km: 50
+  gamma: 1.5
+  yearly_growth: 1.05
+  rounding: floor
+  units: completed_od_trips_per_typical_day
+candidate_spatial_paths_per_od: 3
+allocation_time_limit_seconds: 10
+small_mip_time_limit_seconds: 120
+greedy_shortlist: 48
+annealing_iterations: 100
+annealing_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# Ограниченная модель: аппарат навсегда закреплён за одним коридором и делает
+# 4 оборотных рейса за сутки. Пересадки разрешены по временным путям.
+# На порт приходится не более 2 закреплённых аппаратов всех инцидентных коридоров.
+# Рассматриваются 3 кратчайших пространственных пути на OD и допустимые времена старта.
+# Граница MIP относится только к этой модели, а не к произвольным маршрутам флота.
+# Годовой фиксированный OPEX включает персонал/обслуживание/ремонт/содержание,
+# но не энергию; энергия считается отдельно по всем рейсам, включая порожние.

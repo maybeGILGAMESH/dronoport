@@ -1,0 +1,9 @@
+place_id,gar_id,name_original,name_normalized,region_code,municipality,settlement_type,lat,lon,coordinate_source_id,osm_population_unverified,osm_population_date,osm_wikidata,population,population_year,population_source_id,population_status,population_source_row,quality_flag
+osm_n191849717,,Королёв,КОРОЛЕВ,50,городской округ Королёв,city,55.9190049,37.8150443,osm_central_20261103,225299,2021-01-01,Q155309,228095.0,2021.0,rosstat_vpn2020_t1_5,observed,3152.0,matched
+osm_n336306203,,Кардымово,КАРДЫМОВО,67,Кардымовский муниципальный округ,town,54.8898976,32.435973,osm_central_20261103,4561,2015-01-01,Q4214846,4443.0,2021.0,rosstat_vpn2020_t1_5,observed,4228.0,matched
+osm_n148912020,,Кимры,КИМРЫ,69,Кимрский муниципальный округ,town,56.8734395,37.3556968,osm_central_20261103,46771,2015-01-01,Q146435,40875.0,2021.0,rosstat_vpn2020_t1_5,observed,4754.0,matched
+osm_n191858851,,Люберцы,ЛЮБЕРЦЫ,50,городской округ Люберцы,city,55.6783142,37.89377,osm_central_20261103,208397,2021-01-01,Q141358,224195.0,2021.0,rosstat_vpn2020_t1_5,observed,3188.0,matched
+osm_n312992742,,Красный,КРАСНЫИ,67,Краснинский муниципальный округ,town,54.569439,31.439449,osm_central_20261103,4150,2015-01-01,Q658905,3621.0,2021.0,rosstat_vpn2020_t1_5,observed,4237.0,matched
+osm_n34389206,,Конаково,КОНАКОВО,69,Конаковский муниципальный округ,town,56.7126,36.779,osm_central_20261103,40617,2015-01-01,Q155095,33560.0,2021.0,rosstat_vpn2020_t1_5,observed,4895.0,matched
+osm_n253438546,,Красногорск,КРАСНОГОРСК,50,городской округ Красногорск,city,55.8204707,37.3196942,osm_central_20261103,175812,2021-01-01,Q155569,187634.0,2021.0,rosstat_vpn2020_t1_5,observed,3156.0,matched
+osm_n148901126,,Кашин,КАШИН,69,Кашинский муниципальный округ,town,57.361755,37.611454,osm_central_20261103,15029,2015-01-01,Q145621,14113.0,2021.0,rosstat_vpn2020_t1_5,observed,4760.0,matched

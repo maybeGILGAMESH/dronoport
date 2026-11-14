@@ -1,0 +1,22 @@
+{
+  "source": "central-fed-district-261103.osm.pbf",
+  "source_sha256": "fee73607808b1a0c40afa26c6fa8a9de133fd93940d54f17487389cc177c103d",
+  "source_date": "2026-11-03",
+  "features": 609041,
+  "places": 4438,
+  "seconds": 64.5792555930093,
+  "max_rss_kib": 2869280,
+  "bounds": [
+    30.4,
+    53.25,
+    40.4,
+    59.0
+  ],
+  "output_sha256": "f0b26ca30a3b479345418a63b83166e7691cf26f47d962fee56807c4c12abae4",
+  "attribution": "© OpenStreetMap contributors, ODbL 1.0",
+  "limitations": [
+    "Selective cartography: roads, rail, water lines and closed water ways, settlement labels",
+    "Not the full standard OSM Carto style; water relations and buildings are not rendered",
+    "Network segments are modelled flights, not roads or authorized aviation routes"
+  ]
+}

@@ -1,0 +1,11 @@
+device: cpu
+parallel_runs: 1
+blas_threads: 1
+cp_sat_workers: 2
+mip_time_limit_seconds: 120
+schedule_time_limit_seconds: 120
+seed: 42
+stochastic_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+minimum_free_disk_gib: 10
+# Лимиты являются настройками будущих запусков, не ограничением памяти ОС.
+# Диагностика scripts/check_environment.py задаёт свои короткие лимиты.

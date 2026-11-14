@@ -1,0 +1,17 @@
+{
+  "frozen_samples": true,
+  "osm_nodes": 18664,
+  "added_polygons": 25,
+  "eligible": 4067,
+  "official_rows_checked": 77,
+  "full_registry_verified": false,
+  "official_source_scope": "Rosstat table 5: urban settlements and rural settlements of at least 3000 residents; not full registry",
+  "registry_download": "https://fias.nalog.ru/Frontend",
+  "required_regions": [
+    "50",
+    "67",
+    "69"
+  ],
+  "missing_population_policy": "preserve_null",
+  "ambiguous_geometry": 0
+}

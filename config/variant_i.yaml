@@ -1,0 +1,31 @@
+schema_version: 1
+variant_letter: "И"
+regions:
+  "50": "Московская область"
+  "67": "Смоленская область"
+  "69": "Тверская область"
+excluded_region_codes: ["77"]
+allowed_initials: ["Ж", "З", "И", "К", "Л"]
+normalization: {"Ё": "Е", "Й": "И"}
+years: [1, 2, 3]
+capacity_per_flight: 10
+range_between_charges_km: 200
+stress_range_km: 160
+yearly_tranche_rub: 1000000000
+carry_forward: true
+allow_future_tranches: false
+revenue_finances_base_model: false
+objective: completed_od_trips_over_three_years
+target_main_nodes: 30
+target_small_nodes: 8
+selection_rule: stratified_population_v1  # Подробности в config/data_policy.yaml; зафиксировано до оптимизации.
+primary_pdf_verified: true
+primary_pdf: "Задание_Сеть_дронопортов_России.pdf"
+variant_rules_pdf_page: 3
+region_assignment_pdf_page: 4
+main_nodes_min: 30
+main_nodes_max: 80
+small_nodes_min: 8
+small_nodes_max: 12
+retain_isolated_places: true
+require_port_in_every_region: false

@@ -1,0 +1,2 @@
+-r requirements.txt
+latex2mathml==3.81.1
